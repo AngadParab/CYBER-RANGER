@@ -1,144 +1,7 @@
 // Events Page JavaScript
-
-// ===========================================
-// GOOGLE MAPS GLOBAL VARIABLES AND FUNCTIONS
-// These must be outside the DOMContentLoaded listener for the Maps API to call them.
-// ===========================================
-let map;
-const markers = [];
-const infowindow = new google.maps.InfoWindow();
-
-// Coordinates for the event locations in Goa
-const eventCoordinates = {
-    'panjim': { lat: 15.4909, lng: 73.8278, title: 'Panjim' },
-    'margao': { lat: 15.2736, lng: 73.9589, title: 'Margao' },
-    'vasco': { lat: 15.3866, lng: 73.8154, title: 'Vasco' },
-    'mapusa': { lat: 15.6029, lng: 73.8213, title: 'Mapusa' },
-    'default': { lat: 15.3850, lng: 74.0000, title: 'Central Goa' } // Center of Goa
-};
-
-function initMap() {
-    const defaultCenter = eventCoordinates['default'];
-    
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: defaultCenter,
-        zoom: 11,
-        disableDefaultUI: true, // Hides controls for a cleaner look
-        // Custom dark/cyber styling for the map
-        styles: [
-            { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#00ff88" }] },
-            {
-                featureType: "administrative.locality",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#00ccff" }],
-            },
-            {
-                featureType: "poi",
-                stylers: [{ visibility: "off" }]
-            },
-            {
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [{ color: "#2a2a2a" }],
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#003366" }],
-            },
-            {
-                featureType: "water",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#00ccff" }],
-            },
-        ],
-    });
-
-    // Initial marker load
-    addMarkers(events);
-}
-
-function addMarkers(eventList) {
-    // Clear existing markers
-    markers.forEach(marker => marker.setMap(null));
-    markers.length = 0;
-
-    // Use a Set to track unique locations by name to avoid duplicate city markers
-    const uniqueLocations = new Set();
-
-    eventList.forEach(event => {
-        const locationKey = event.location.toLowerCase();
-        const coord = eventCoordinates[locationKey];
-
-        if (coord && !uniqueLocations.has(locationKey)) {
-            uniqueLocations.add(locationKey);
-            
-            const contentString = `
-                <div style="color: #000; font-family: sans-serif; max-width: 200px;">
-                    <h4 style="margin: 0 0 5px; color: #00ff88;">${escapeHtml(event.title)}</h4>
-                    <p style="margin: 0 0 5px; font-size: 12px;"><strong>Venue:</strong> ${escapeHtml(event.venue)}</p>
-                    <p style="margin: 0; font-size: 12px;"><strong>Date:</strong> ${formatDate(event.date)}</p>
-                </div>
-            `;
-
-            const marker = new google.maps.Marker({
-                position: coord,
-                map: map,
-                title: event.title,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 8,
-                    fillColor: '#00ff88', // cyber green
-                    fillOpacity: 1,
-                    strokeWeight: 2,
-                    strokeColor: '#00ccff' // cyber blue border
-                },
-                // Custom property to aid filtering/centering
-                filterKey: locationKey
-            });
-
-            marker.addListener('click', () => {
-                // Set and open the infowindow
-                infowindow.setContent(contentString);
-                infowindow.open(map, marker);
-            });
-            
-            markers.push(marker);
-        }
-    });
-}
-
-function centerMapOnLocation(filter) {
-    if (!map) return;
-
-    const locationKey = filter.toLowerCase();
-    const coord = eventCoordinates[locationKey] || eventCoordinates['default'];
-    const zoomLevel = (filter === 'all' || filter === 'upcoming' || filter === 'default' || filter === 'search') ? 11 : 13;
-
-    map.panTo(coord);
-    map.setZoom(zoomLevel);
-    
-    // Find the first marker associated with the filter and open its infowindow
-    const targetMarker = markers.find(m => m.filterKey === locationKey);
-    
-    infowindow.close(); // Close previous infowindow
-    
-    if (targetMarker) {
-        infowindow.setContent(targetMarker.infowindow.getContent());
-        infowindow.open(map, targetMarker);
-    }
-}
-
-
-// ===========================================
-// DOM CONTENT LOADED (Your existing logic)
-// ===========================================
 document.addEventListener('DOMContentLoaded', function() {
     const eventsGrid = document.getElementById('eventsGrid');
     const searchInput = document.getElementById('eventSearch');
-    const filterButtons = document.querySelectorAll('.filters .btn');
     
     // Event data with cyber awareness workshops across Goa
     const events = [
@@ -380,11 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add animation to cards
         observeCards();
-        
-        // Update markers on the map to reflect the filtered list
-        if (typeof initMap === 'function' && map) {
-            addMarkers(eventList);
-        }
     }
 
     // Format date function
@@ -406,15 +264,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function filterEvents(filter) {
         let filteredEvents = events;
         
-        // Update active class on buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.filters button[data-filter="${filter}"]`).classList.add('active');
-
         if (filter === 'upcoming') {
-            // Filter for events that haven't happened yet (using simple date comparison)
-            filteredEvents = events.filter(event => new Date(event.date) >= new Date());
-        } else if (filter !== 'all') {
-            filteredEvents = events.filter(event => event.location.toLowerCase() === filter);
+            filteredEvents = events.filter(event => event.status === 'upcoming');
+        } else if (filter === 'panjim') {
+            filteredEvents = events.filter(event => event.location.toLowerCase() === 'panjim');
+        } else if (filter === 'margao') {
+            filteredEvents = events.filter(event => event.location.toLowerCase() === 'margao');
+        } else if (filter === 'vasco') {
+            filteredEvents = events.filter(event => event.location.toLowerCase() === 'vasco');
+        } else if (filter === 'mapusa') {
+            filteredEvents = events.filter(event => event.location.toLowerCase() === 'mapusa');
         }
         
         renderEvents(filteredEvents);
@@ -427,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function searchEvents(searchTerm) {
         if (!searchTerm.trim()) {
             renderEvents();
-            centerMapOnLocation('default');
             return;
         }
         
@@ -439,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
         );
         
         renderEvents(filteredEvents);
-        centerMapOnLocation('default'); // Reset map view for search results
     }
 
     // Card animation observer
@@ -449,40 +306,135 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const cards = document.querySelectorAll('.card');
-        
-        // Disconnect old observer if it exists
-        if (this.cardObserver) this.cardObserver.disconnect();
-
-        this.cardObserver = new IntersectionObserver((entries) => {
+        const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                    this.cardObserver.unobserve(entry.target);
-                } else {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(20px)';
                 }
             });
         }, observerOptions);
 
+        const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-            // Apply initial style for animation
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            this.cardObserver.observe(card);
+            cardObserver.observe(card);
         });
     }
-    
-    // --- Event Listeners ---
-    filterButtons.forEach(button => {
-        button.addEventListener('click', (e) => filterEvents(e.target.dataset.filter));
+
+    // Event listeners
+    document.querySelectorAll('.filters .btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filters .btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            filterEvents(filter);
+        });
     });
 
-    searchInput.addEventListener('input', (e) => searchEvents(e.target.value));
+    searchInput.addEventListener('input', (e) => {
+        searchEvents(e.target.value);
+    });
 
-    // Initial render
+    // Initialize
     renderEvents();
+    
+    // Initialize map
+    initializeMap();
 });
+
+// Map functionality
+let map;
+let markers = [];
+
+function initializeMap() {
+    // Check if Leaflet is loaded
+    if (typeof L === 'undefined') {
+        console.warn('Leaflet library not loaded');
+        return;
+    }
+    
+    map = L.map('map').setView([15.4909, 73.8278], 12); // Panjim coordinates
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+    
+    // Add markers for different event locations with custom icons
+    const eventLocations = [
+        { 
+            coords: [15.4909, 73.8278], 
+            title: 'Panjim Events', 
+            popup: 'Cyber Awareness Events - Panjim',
+            filter: 'panjim'
+        },
+        { 
+            coords: [15.2736, 73.9589], 
+            title: 'Margao Events', 
+            popup: 'Cyber Awareness Events - Margao',
+            filter: 'margao'
+        },
+        { 
+            coords: [15.3866, 73.8154], 
+            title: 'Vasco Events', 
+            popup: 'Cyber Awareness Events - Vasco',
+            filter: 'vasco'
+        },
+        { 
+            coords: [15.6029, 73.8114], 
+            title: 'Mapusa Events', 
+            popup: 'Cyber Awareness Events - Mapusa',
+            filter: 'mapusa'
+        }
+    ];
+    
+    // Create custom marker icon
+    const cyberIcon = L.divIcon({
+        className: 'cyber-marker',
+        html: '<div style="background: linear-gradient(135deg, #00ff88, #00ccff); width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
+    
+    eventLocations.forEach(location => {
+        const marker = L.marker(location.coords, { icon: cyberIcon })
+            .addTo(map)
+            .bindPopup(location.popup)
+            .openTooltip();
+        
+        // Store marker with filter info for highlighting
+        marker.filter = location.filter;
+        markers.push(marker);
+    });
+}
+
+// Function to center map on specific location
+function centerMapOnLocation(filter) {
+    if (!map) return;
+    
+    const locations = {
+        'panjim': [15.4909, 73.8278],
+        'margao': [15.2736, 73.9589],
+        'vasco': [15.3866, 73.8154],
+        'mapusa': [15.6029, 73.8114],
+        'all': [15.4909, 73.8278] // Default to Panjim for 'all'
+    };
+    
+    const coords = locations[filter];
+    if (coords) {
+        map.setView(coords, 13);
+        
+        // Highlight the relevant marker
+        markers.forEach(marker => {
+            if (filter === 'all' || marker.filter === filter) {
+                marker.setOpacity(1);
+                marker.bringToFront();
+            } else {
+                marker.setOpacity(0.5);
+            }
+        });
+    }
+}

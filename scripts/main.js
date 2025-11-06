@@ -86,23 +86,101 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
     
-    // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
-        });
-    }
-    
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const emailInput = this.querySelector('input[type="email"]');
-            alert(`Thank you for subscribing with ${emailInput.value}!`);
-            emailInput.value = '';
-        });
-    }
+   // Form function logic 
+const FUNCTIONS_BASE_URL = 'YOUR_FIREBASE_FUNCTIONS_BASE_URL'; 
+
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const button = form.querySelector('button');
+        const originalButtonText = button.textContent;
+
+        const data = {
+            name: form.elements.name.value,
+            email: form.elements.email.value,
+            message: form.elements.message.value
+        };
+
+        button.textContent = 'Sending...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(`${FUNCTIONS_BASE_URL}/submitContact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                button.textContent = 'Sent! ✅';
+                form.reset();
+                setTimeout(() => {
+                    button.textContent = originalButtonText;
+                    button.disabled = false;
+                }, 3000);
+            } else {
+                const errorData = await response.json();
+                button.textContent = 'Failed ❌';
+                alert(`Error: ${errorData.message || 'Please try again later.'}`);
+                button.disabled = false;
+            }
+
+        } catch (error) {
+            console.error('Network Error:', error);
+            button.textContent = 'Error ❌';
+            alert('A network error occurred. Please check your connection.');
+            button.disabled = false;
+        }
+    });
+}
+
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const emailInput = form.elements.email;
+        const button = form.querySelector('button');
+        const originalButtonText = button.textContent;
+
+        const data = {
+            email: emailInput.value
+        };
+
+        button.textContent = 'Subscribing...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(`${FUNCTIONS_BASE_URL}/subscribeNewsletter`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                button.textContent = 'Subscribed! 🎉';
+                emailInput.value = '';
+                setTimeout(() => {
+                    button.textContent = originalButtonText;
+                    button.disabled = false;
+                }, 3000);
+            } else {
+                const errorData = await response.json();
+                button.textContent = 'Failed ❌';
+                alert(`Error: ${errorData.message || 'Subscription failed. Try again.'}`);
+                button.disabled = false;
+            }
+
+        } catch (error) {
+            console.error('Network Error:', error);
+            button.textContent = 'Error ❌';
+            alert('A network error occurred.');
+            button.disabled = false;
+        }
+    });
+}
 });

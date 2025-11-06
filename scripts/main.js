@@ -87,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
    // Form function logic 
-const FUNCTIONS_BASE_URL = 'YOUR_FIREBASE_FUNCTIONS_BASE_URL'; 
+
+const FUNCTIONS_BASE_URL = 'https://us-central1-cyber-ranger.cloudfunctions.net'; 
 
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {

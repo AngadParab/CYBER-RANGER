@@ -6,7 +6,7 @@
     <title>Cyber Awareness Events - Cyber Ranger</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Removed Leaflet styles (replaced with Google Maps JS API) -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/events.css">
 </head>
@@ -174,10 +174,12 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Google Maps JavaScript API: replace YOUR_API_KEY with a valid key -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdlPlM85jvsD5xPytFLuIMFURJ6a9qAZs&callback=initMap"></script>
     <script type="module" src="../scripts/firebase-config.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/events.js"></script>
     <script src="../scripts/chatbot.js"></script>
+   
 </body>
 </html>

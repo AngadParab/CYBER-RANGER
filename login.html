@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Ranger - Login</title>
+    <meta name="description" content="Secure access to Cyber Ranger platform">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Orbitron and Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <main class="login-container" role="main">
+        <header class="login-header">
+            <div class="header-content">
+                <div class="logo-section">
+                   <img src="assets/icons/logo.png" alt="Cyber Ranger " class="cyber-logo">
+                </div>
+                <h1 class="welcome-title">CYBER RANGER</h1>
+            </div>
+        </header>
+        <section class="content-area">
+            <!-- Ambassador Login Section -->
+            <div
+                class="content-section"
+                id="ambassador-content"
+                role="region"
+                aria-labelledby="ambassador-login-heading">
+                <div class="ambassador-section">
+                    <h2 class="section-title" id="ambassador-login-heading">Ambassador Login</h2>
+                    <p class="section-description">
+                        Securely access the Cyber Ranger ambassador portal to manage initiatives, publish updates,
+                        and collaborate with the core team.
+                    </p>
+                    <form id="ambassador-form" class="login-form" novalidate>
+                        <div class="form-group">
+                            <label for="ambassador-email" class="form-label">
+                                Ambassador Email
+                            </label>
+                            <div class="input-wrapper">
+                                <input
+                                    type="email"
+                                    id="ambassador-email"
+                                    name="email"
+                                    class="form-input"
+                                    placeholder="Enter your email"
+                                    required
+                                    aria-describedby="email-error">
+                                <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                            </div>
+                            <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ambassador-password" class="form-label">
+                                Password
+                            </label>
+                            <div class="input-wrapper">
+                                <input
+                                    type="password"
+                                    id="ambassador-password"
+                                    name="password"
+                                    class="form-input"
+                                    placeholder="Enter your password"
+                                    required
+                                    aria-describedby="password-error">
+                                <i class="fas fa-key input-icon" aria-hidden="true"></i>
+                            </div>
+                            <div id="password-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button
+                                type="submit"
+                                class="primary-btn"
+                                id="sign-in-btn">
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                                <span class="btn-text">Sign In</span>
+                                <div class="loading-spinner" hidden>
+                                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="scripts/login.js"></script>
+</body>
+</html>

@@ -196,6 +196,11 @@ img {
     width: 100%;
 }
 
+.nav-link {
+    padding: 8px 0;
+    color: rgba(255, 254, 254, 0.9);
+}
+
 .mobile-menu-btn {
     display: none;
     color: rgb(255, 255, 255);
@@ -237,6 +242,8 @@ img {
         background: rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
     }
+
+    /* Mobile: ensure nav links (including .nav-link) display as list items */
     
     .nav-links a:hover {
         background: var(--secondary);

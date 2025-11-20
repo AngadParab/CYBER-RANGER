@@ -8,17 +8,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
-    mobileMenuBtn.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on a link
-    const navItems = document.querySelectorAll('.nav-links a');
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            navLinks.classList.remove('active');
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
         });
-    });
+
+        // Use event delegation so any anchor added dynamically will close the mobile menu
+        navLinks.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            // If a link inside nav-links was clicked, close the mobile menu
+            if (target && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+
 
     // Mobile dropdown functionality
     const dropdowns = document.querySelectorAll('.dropdown');

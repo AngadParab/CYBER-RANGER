@@ -61,14 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const levelFill = entry.target.querySelector('.level-fill');
-                const width = levelFill.style.width;
-                levelFill.style.width = '0';
-
-                setTimeout(() => {
-                    levelFill.style.transition = 'width 1.5s ease-in-out';
-                    levelFill.style.width = width;
-                }, 300);
-
+                if (levelFill) {
+                    // Add animate class; CSS handles the transition to the correct width
+                    levelFill.classList.add('animate');
+                }
                 observer.unobserve(entry.target);
             }
         });
@@ -182,4 +178,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+});
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', function() {
+    card.classList.toggle('flipped');
+  });
 });

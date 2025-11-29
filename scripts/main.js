@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function() {
             navLinks.classList.toggle('active');
+            // Close all dropdowns when mobile menu is toggled
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
         });
 
         // Use event delegation so any anchor added dynamically will close the mobile menu
@@ -19,8 +23,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // If a link inside nav-links was clicked, close the mobile menu
             if (target && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
+                // Close all dropdowns when a nav link is clicked
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
             }
         });
+
+        // Close mobile menu when logo is clicked on mobile
+        const logo = document.querySelector('.logo .brand-title');
+        if (logo) {
+            logo.addEventListener('click', function() {
+                if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    // Close all dropdowns if they exist
+                    const allDropdowns = document.querySelectorAll('.dropdown');
+                    allDropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        }
     }
 
 
@@ -34,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
 
-            // Close other dropdowns
+            // Close other dropdowns only if they are not the current dropdown and if the mobile menu is active
             dropdowns.forEach(otherDropdown => {
-                if (otherDropdown !== dropdown) {
+                if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
                     otherDropdown.classList.remove('active');
                 }
             });
@@ -46,12 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close dropdowns when clicking outside
+    // Close dropdowns and mobile menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
+        if (!e.target.closest('.navbar')) {
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });
+            navLinks.classList.remove('active'); // Also close mobile menu
         }
     });
 

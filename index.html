@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                 <span class="brand-title" style="color: white; ">CYBER RANGER</span>
+                 <a href="#" class="brand-title" style="color: white; ">CYBER RANGER</a>
 </div>
             <div class="nav-links">
                 <a href="#" class="active">Home</a>
@@ -31,9 +34,10 @@
                 <a href="#about">About</a>
                 <a href="login.html" class="nav-link">Login</a>
             </div>
-            <div class="mobile-menu-btn">
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
                 <i class="fas fa-bars"></i>
-            </div>
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </nav>
 
@@ -48,14 +52,14 @@
                 <h1>Awareness is the First Step to Digital Safety</h1>
                 <p>Together, we are creating a safer digital future for Goa by empowering every citizen with the knowledge and tools to stay protected online</p>
                 <div class="hero-btns">
-                    <a href="#contact" class="btn primary-btn">📞 Report Cybercrime – Dial 1930</a>
+                    <a href="tel:1930" class="btn primary-btn">📞 Report Cybercrime – Dial 1930</a>
+                    
                     <a href="#prevention" class="btn outline-btn">Learn How to Stay Safe</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Problem Statement -->
     <section class="problem-statement">
         <div class="container">

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Ranger - Ambassador Dashboard</title>
+  <meta name="description" content="Ambassador dashboard for managing events and reviewing impact metrics.">
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Shared & Page Styles -->
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-grid">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <img src="../assets/icons/logo.png" alt="Cyber Ranger Logo" class="sidebar__logo">
+        <span class="sidebar__brand-text">CYBER RANGER</span>
+      </div>
+      <nav class="sidebar__nav" aria-label="Dashboard navigation">
+        <button class="nav-link is-active" data-section="dashboard">
+          <i class="fa-solid fa-gauge"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-link" data-section="events">
+          <i class="fa-solid fa-calendar-plus"></i>
+          <span>Manage Events</span>
+        </button>
+        <button class="nav-link" data-section="data-review">
+          <i class="fa-solid fa-database"></i>
+          <span>Data Review</span>
+        </button>
+        <button class="nav-link" data-section="profile">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </button>
+        <button class="nav-link nav-link--danger" id="logout-btn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Section: Dashboard -->
+      <section class="section is-visible" data-section="dashboard" aria-label="Dashboard overview">
+        <header class="section__header">
+          <h1>Ambassador Dashboard</h1>
+          <p class="section__subtitle">Mission overview and quick actions</p>
+        </header>
+
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <div class="metric-card__icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="metric-card__content">
+              <p class="metric-card__label">Total Events Held</p>
+              <p class="metric-card__value" id="metric-events">--</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card__icon"><i class="fa-solid fa-users"></i></div>
+            <div class="metric-card__content">
+              <p class="metric-card__label">Citizens Impacted</p>
+              <p class="metric-card__value" id="metric-impact">--</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card__icon"><i class="fa-solid fa-inbox"></i></div>
+            <div class="metric-card__content">
+              <p class="metric-card__label">New Submissions (7d)</p>
+              <p class="metric-card__value" id="metric-submissions">--</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-card__icon"><i class="fa-solid fa-shield-virus"></i></div>
+            <div class="metric-card__content">
+              <p class="metric-card__label">Cases Reviewed</p>
+              <p class="metric-card__value" id="metric-cases">--</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="quick-actions__buttons">
+            <button class="primary-action" data-section-target="events">
+              <i class="fa-solid fa-plus"></i>
+              Add New Event
+            </button>
+            <button class="secondary-action" data-section-target="data-review">
+              <i class="fa-solid fa-list-check"></i>
+              View Submissions
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Manage Events -->
+      <section class="section" data-section="events" aria-label="Manage events">
+        <header class="section__header">
+          <h1>Manage Events</h1>
+          <p class="section__subtitle">Add new workshops and track upcoming sessions</p>
+        </header>
+
+        <div class="card">
+          <h3>Add New Event</h3>
+          <form class="form-grid" id="event-form" novalidate>
+            <label>
+              <span>Title</span>
+              <input type="text" name="title" placeholder="e.g., Cyber Safety Workshop" required>
+            </label>
+            <label>
+              <span>Date</span>
+              <input type="date" name="date" required>
+            </label>
+            <label>
+              <span>Location</span>
+              <input type="text" name="location" placeholder="City / Online" required>
+            </label>
+            <button type="submit" class="primary-action">
+              <i class="fa-solid fa-paper-plane"></i>
+              Save Event
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <h3>Upcoming Events</h3>
+            <span class="pill pill--muted">Placeholder</span>
+          </div>
+          <div class="table">
+            <div class="table__head">
+              <span>Title</span>
+              <span>Date</span>
+              <span>Location</span>
+              <span>Status</span>
+            </div>
+            <div class="table__body">
+              <div class="table__row is-placeholder">
+                <span>—</span>
+                <span>—</span>
+                <span>—</span>
+                <span>—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Data Review -->
+      <section class="section" data-section="data-review" aria-label="Data review">
+        <header class="section__header">
+          <h1>Data Review (Submissions)</h1>
+          <p class="section__subtitle">Latest contact and newsletter submissions</p>
+        </header>
+
+        <div class="card">
+          <div class="card__header">
+            <h3>Recent Submissions</h3>
+            <span class="pill pill--muted">Placeholder</span>
+          </div>
+          <div class="table">
+            <div class="table__head">
+              <span>Name</span>
+              <span>Email</span>
+              <span>Message</span>
+            </div>
+            <div class="table__body">
+              <div class="table__row is-placeholder">
+                <span>—</span>
+                <span>—</span>
+                <span>—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Profile -->
+      <section class="section" data-section="profile" aria-label="Profile">
+        <header class="section__header">
+          <h1>Profile</h1>
+          <p class="section__subtitle">Profile and preferences (placeholder)</p>
+        </header>
+        <div class="card">
+          <p>Profile details and settings will appear here.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../scripts/ambassador-dashboard.js"></script>
+</body>
+</html>
+

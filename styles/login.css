@@ -324,6 +324,8 @@ body {
 .form-actions {
   display: flex;
   justify-content: flex-end;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
   margin-top: var(--spacing-lg);
 }
 /* Responsive Design */

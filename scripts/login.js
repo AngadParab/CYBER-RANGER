@@ -1,26 +1,16 @@
 /**
- * Cyber Ranger Ambassador Login Script
- * Handles Firebase authentication and input validation for a single-mode form.
+ * Cyber Ranger Ambassador Login (Firebase Modular SDK)
+ * Handles authentication, validation, password reset, and auth redirects.
  */
 
-// Firebase Configuration - Replace with real project values
-const firebaseConfig = {
-  apiKey: "AIzaSyDRMJNDa0__NPI7p9-3LIeX2q228liz0F8",
-    authDomain: "cyber-ranger.firebaseapp.com",
-    projectId: "cyber-ranger",
-    storageBucket: "cyber-ranger.firebasestorage.app",
-    messagingSenderId: "783225495647",
-    appId: "1:783225495647:web:7efb25367c38d388963bea",
-};
+import { auth } from "./firebase-config.js";
+import {
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-let auth = null;
-try {
-  firebase.initializeApp(firebaseConfig);
-  auth = firebase.auth();
-  console.log("Firebase initialized successfully");
-} catch (error) {
-  console.log("Firebase initialization skipped - running in demo mode:", error.message);
-}
+const DASHBOARD_PATH = "/Webpages/ambassador-dashboard.html";
 
 const state = {
   isSubmitting: false,
@@ -40,7 +30,8 @@ const elements = {
   passwordInput: null,
   emailError: null,
   passwordError: null,
-  submitButton: null
+  submitButton: null,
+  forgotPasswordButton: null
 };
 
 function initApp() {
@@ -53,12 +44,9 @@ function initApp() {
 
   setupEventListeners();
   setInitialFocus();
+  initAuthRedirect();
 
-  if (auth) {
-    auth.onAuthStateChanged(handleAuthStateChange);
-  }
-
-  console.log("Cyber Ranger Ambassador Login ready");
+  console.log("Cyber Ranger Ambassador Login ready (modular Firebase)");
 }
 
 function cacheElements() {
@@ -68,10 +56,12 @@ function cacheElements() {
   elements.emailError = document.getElementById("email-error");
   elements.passwordError = document.getElementById("password-error");
   elements.submitButton = document.getElementById("sign-in-btn");
+  elements.forgotPasswordButton = document.getElementById("forgot-password-btn");
 }
 
 function setupEventListeners() {
   elements.form?.addEventListener("submit", handleAmbassadorLogin);
+  elements.forgotPasswordButton?.addEventListener("click", handlePasswordReset);
 
   elements.emailInput?.addEventListener("input", (event) => validateField("email", event.target.value));
   elements.emailInput?.addEventListener("blur", (event) => validateField("email", event.target.value));
@@ -87,10 +77,12 @@ function setInitialFocus() {
   elements.emailInput?.focus();
 }
 
-function handleAuthStateChange(user) {
-  if (user) {
-    showNotification(`Welcome back, ${user.displayName || user.email}!`, "success");
-  }
+function initAuthRedirect() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = DASHBOARD_PATH;
+    }
+  });
 }
 
 function handleAmbassadorLogin(event) {
@@ -108,6 +100,39 @@ function handleAmbassadorLogin(event) {
 
   setFormLoading(true);
   authenticateWithFirebase();
+}
+
+async function handlePasswordReset() {
+  const email = elements.emailInput?.value.trim() || "";
+  if (!validateEmail(email)) {
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showNotification("Password reset email sent. Please check your inbox.", "success");
+  } catch (error) {
+    console.error("Password reset error:", error);
+    let errorMessage = "Unable to send reset email. Please try again.";
+
+    switch (error.code) {
+      case "auth/user-not-found":
+        errorMessage = "No account found with this email address.";
+        break;
+      case "auth/invalid-email":
+        errorMessage = "Invalid email address format.";
+        break;
+      case "auth/too-many-requests":
+        errorMessage = "Too many requests. Please try again later.";
+        break;
+      case "auth/network-request-failed":
+        errorMessage = "Network error. Please check your connection.";
+        break;
+    }
+
+    showError("email", errorMessage);
+    showNotification(errorMessage, "error");
+  }
 }
 
 function validateForm() {
@@ -232,20 +257,15 @@ function setButtonLoading(button, isLoading) {
 }
 
 async function authenticateWithFirebase() {
-  if (!auth) {
-    simulateFirebaseAuth();
-    return;
-  }
-
   try {
-    const userCredential = await auth.signInWithEmailAndPassword(
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
       state.formData.email,
       state.formData.password
     );
     const user = userCredential.user;
     showNotification(`Welcome back, Ambassador ${user.displayName || user.email}!`, "success");
-    setFormLoading(false);
-    // window.location.href = "/ambassador-dashboard";
+    window.location.href = DASHBOARD_PATH;
   } catch (error) {
     console.error("Firebase authentication error:", error);
     let errorMessage = "Authentication failed. Please try again.";
@@ -273,31 +293,9 @@ async function authenticateWithFirebase() {
 
     showError("password", errorMessage);
     showNotification(errorMessage, "error");
+  } finally {
     setFormLoading(false);
   }
-}
-
-function simulateFirebaseAuth() {
-  const outcomes = ["success", "invalid-credentials", "server-error"];
-  const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
-
-  switch (outcome) {
-    case "success":
-      showNotification(
-        `Welcome back, Ambassador ${state.formData.email}! Authentication successful.`,
-        "success"
-      );
-      break;
-    case "invalid-credentials":
-      showError("password", "Invalid email or password");
-      showNotification("Authentication failed. Please check your credentials.", "error");
-      break;
-    case "server-error":
-      showNotification("Authentication service unavailable. Please try again later.", "error");
-      break;
-  }
-
-  setFormLoading(false);
 }
 
 function showNotification(message, type = "info") {
@@ -343,6 +341,7 @@ function showNotification(message, type = "info") {
 
 function cleanup() {
   elements.form?.removeEventListener("submit", handleAmbassadorLogin);
+  elements.forgotPasswordButton?.removeEventListener("click", handlePasswordReset);
 }
 
 if (document.readyState === "loading") {
@@ -354,6 +353,5 @@ if (document.readyState === "loading") {
 window.addEventListener("beforeunload", cleanup);
 
 window.CyberRangerLogin = {
-  validateField,
-  firebaseConfig
+  validateField
 };

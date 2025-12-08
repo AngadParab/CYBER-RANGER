@@ -436,6 +436,7 @@ img {
     transition: all 0.3s ease;
     cursor: pointer;
     display: inline-block;
+    color: #ffe601 !important;
 }
 
 .brand-title:hover {

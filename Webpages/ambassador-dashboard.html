@@ -108,32 +108,21 @@
           <p class="section__subtitle">Add new workshops and track upcoming sessions</p>
         </header>
 
-        <div class="card">
-          <h3>Add New Event</h3>
-          <form class="form-grid" id="event-form" novalidate>
-            <label>
-              <span>Title</span>
-              <input type="text" name="title" placeholder="e.g., Cyber Safety Workshop" required>
-            </label>
-            <label>
-              <span>Date</span>
-              <input type="date" name="date" required>
-            </label>
-            <label>
-              <span>Location</span>
-              <input type="text" name="location" placeholder="City / Online" required>
-            </label>
-            <button type="submit" class="primary-action">
-              <i class="fa-solid fa-paper-plane"></i>
-              Save Event
-            </button>
-          </form>
+        <div class="card card--split">
+          <div>
+            <h3>Add New Event</h3>
+            <p class="text-muted">Use the button to add an event. A form modal will appear.</p>
+          </div>
+          <button type="button" class="primary-action" id="open-event-modal">
+            <i class="fa-solid fa-plus"></i>
+            Add Event
+          </button>
         </div>
 
         <div class="card">
           <div class="card__header">
             <h3>Upcoming Events</h3>
-            <span class="pill pill--muted">Placeholder</span>
+            <span class="pill pill--muted" id="event-count">0 events</span>
           </div>
           <div class="table">
             <div class="table__head">
@@ -142,7 +131,7 @@
               <span>Location</span>
               <span>Status</span>
             </div>
-            <div class="table__body">
+            <div class="table__body" id="events-table-body">
               <div class="table__row is-placeholder">
                 <span>—</span>
                 <span>—</span>
@@ -187,13 +176,78 @@
       <section class="section" data-section="profile" aria-label="Profile">
         <header class="section__header">
           <h1>Profile</h1>
-          <p class="section__subtitle">Profile and preferences (placeholder)</p>
+          <p class="section__subtitle">Profile and preferences</p>
         </header>
-        <div class="card">
-          <p>Profile details and settings will appear here.</p>
+        <div class="card profile-card">
+          <div class="profile-card__header">
+            <div class="profile-card__avatar" id="profile-avatar" aria-hidden="true">CR</div>
+            <div>
+              <h3 id="profile-name">Ambassador</h3>
+              <p class="text-muted" id="profile-email">email@example.com</p>
+            </div>
+          </div>
+          <div class="profile-grid">
+            <div>
+              <p class="label">Occupation</p>
+              <p id="profile-occupation">—</p>
+            </div>
+            <div>
+              <p class="label">Age</p>
+              <p id="profile-age">—</p>
+            </div>
+            <div>
+              <p class="label">Mobile</p>
+              <p id="profile-phone">—</p>
+            </div>
+            <div>
+              <p class="label">Email</p>
+              <p id="profile-email-duplicate">—</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- Event Modal -->
+  <div class="modal" id="event-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3>Add New Event</h3>
+        <button type="button" class="icon-btn" id="close-event-modal" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form class="form-grid" id="event-form" novalidate>
+        <label>
+          <span>Title</span>
+          <input type="text" name="title" placeholder="e.g., Cyber Safety Workshop" required>
+        </label>
+        <label>
+          <span>Date</span>
+          <input type="date" name="date" required>
+        </label>
+        <label>
+          <span>Location</span>
+          <input type="text" name="location" placeholder="City / Online" required>
+        </label>
+        <label>
+          <span>Status</span>
+          <select name="status" required>
+            <option value="Upcoming" selected>Upcoming</option>
+            <option value="Draft">Draft</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </label>
+        <div class="modal__actions">
+          <button type="button" class="secondary-action" id="cancel-event-modal">Cancel</button>
+          <button type="submit" class="primary-action">
+            <i class="fa-solid fa-paper-plane"></i>
+            Save Event
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script type="module" src="../scripts/ambassador-dashboard.js"></script>

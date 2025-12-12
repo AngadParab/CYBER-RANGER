@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cyber-ranger"
-  }
+    "default": "cyber-ranger",
+    "Cyber ranger": "cyber-ranger"
+  },
+  "targets": {},
+  "etags": {}
 }

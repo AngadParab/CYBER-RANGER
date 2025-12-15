@@ -5,13 +5,21 @@
  * - Provides logout handler
  */
 
-import { auth } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 const LOGIN_PATH = "/login.html";
+const EVENTS_COLLECTION = collection(db, "public_events");
 
 const state = {
   activeSection: "dashboard",
@@ -22,8 +30,7 @@ const state = {
     occupation: "—",
     age: "—",
     photoURL: ""
-  },
-  events: []
+  }
 };
 
 const elements = {
@@ -43,7 +50,7 @@ function init() {
   wireEventsModal();
   guardRoute();
   renderProfile();
-  renderEvents();
+  subscribeToEvents();
 }
 
 function cacheElements() {
@@ -179,7 +186,7 @@ function toggleModal(isOpen) {
   }
 }
 
-function handleEventSubmit(event) {
+async function handleEventSubmit(event) {
   event.preventDefault();
   const form = elements.event.form;
   if (!form) return;
@@ -188,27 +195,44 @@ function handleEventSubmit(event) {
     title: formData.get("title")?.toString().trim() || "Untitled",
     date: formData.get("date")?.toString(),
     location: formData.get("location")?.toString().trim() || "—",
-    status: formData.get("status")?.toString() || "Upcoming"
+    status: formData.get("status")?.toString() || "Upcoming",
+    createdAt: new Date().toISOString()
   };
-  state.events = [
-    newEvent,
-    ...state.events
-  ];
-  renderEvents();
-  toggleModal(false);
+  try {
+    await addDoc(EVENTS_COLLECTION, newEvent);
+    toggleModal(false);
+  } catch (error) {
+    console.error("Failed to add event", error);
+    alert("Failed to add event. Please try again.");
+  }
+}
+
+function subscribeToEvents() {
+  const q = query(EVENTS_COLLECTION, orderBy("createdAt", "desc"));
+  onSnapshot(
+    q,
+    (snapshot) => {
+      state.events = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      renderEvents();
+    },
+    (error) => {
+      console.error("Failed to subscribe to events", error);
+    }
+  );
 }
 
 function renderEvents() {
   const { tableBody, count } = elements.event;
   if (!tableBody) return;
+  const events = state.events || [];
 
-  if (!state.events.length) {
+  if (!events.length) {
     tableBody.innerHTML = `
       <div class="table__row is-placeholder">
         <span>—</span><span>—</span><span>—</span><span>—</span>
       </div>`;
   } else {
-    tableBody.innerHTML = state.events
+    tableBody.innerHTML = events
       .map(
         (evt) => `
       <div class="table__row">
@@ -222,7 +246,7 @@ function renderEvents() {
   }
 
   if (count) {
-    const num = state.events.length;
+    const num = events.length;
     count.textContent = `${num} event${num === 1 ? "" : "s"}`;
   }
 }

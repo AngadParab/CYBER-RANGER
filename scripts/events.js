@@ -15,6 +15,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Render events function
     function renderEvents(eventList = publicEvents) {
+        if (!eventsGrid) return;
+        
+        // Handle empty events list
+        if (!eventList || eventList.length === 0) {
+            eventsGrid.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #95a5a6;">
+                    <p>No events available at this time. Check back soon!</p>
+                </div>
+            `;
+            return;
+        }
+        
         eventsGrid.innerHTML = eventList.map(event => {
             const safeEvent = {
                 title: event.title || "Untitled",
@@ -73,7 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Format date function
     function formatDate(dateString) {
+        if (!dateString) return "TBD";
         const date = new Date(dateString);
+        if (Number.isNaN(date.getTime())) return dateString; // Return original if invalid
         return date.toLocaleDateString('en-US', { 
             month: 'short', 
             day: 'numeric', 
@@ -127,15 +141,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function subscribeToPublicEvents() {
+        // Order by createdAt descending to show newest events first
+        // If you prefer to order by event date, use: orderBy("date", "asc")
         const q = query(EVENTS_COLLECTION, orderBy("createdAt", "desc"));
         onSnapshot(
             q,
             (snapshot) => {
-                publicEvents = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                publicEvents = snapshot.docs.map((doc) => ({ 
+                    id: doc.id, 
+                    ...doc.data() 
+                }));
                 renderEvents(publicEvents);
             },
             (error) => {
                 console.error("Failed to subscribe to public events", error);
+                // Show error message to user if needed
+                if (eventsGrid) {
+                    eventsGrid.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; color: #e74c3c;">
+                            <p>Unable to load events. Please refresh the page.</p>
+                        </div>
+                    `;
+                }
             }
         );
     }

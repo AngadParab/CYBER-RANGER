@@ -1,0 +1,321 @@
+/* Cyber Action Hub Page Styles */
+:root {
+    --bg: #e6fff3;
+    --card: #ffffff;
+    --accent: #06b6d4;
+    --muted: #94a3b8;
+    --glass: rgba(255,255,255,0.03);
+    --radius: 14px;
+    --gold: #f59e0b;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+    --blue: #3b82f6;
+}
+
+.action-hub-page {
+    background-color: var(--bg);
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    color: #0f1724;
+}
+
+/* Hero Section */
+.action-hub-hero {
+    background: linear-gradient(135deg, #000000, var(--dark));
+    color: #e6eef6;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.action-hub-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #e6eef6;
+    font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+.action-hub-hero h1 i {
+    color: var(--accent);
+    margin-right: 15px;
+}
+
+.action-hub-hero p {
+    font-size: 1.2rem;
+    color: rgba(230, 238, 246, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Main Section */
+.action-hub-section {
+    padding: 24px;
+}
+
+/* Search Container */
+.search-container {
+    margin-bottom: 40px;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 18px;
+    z-index: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 20px 12px 55px;
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color: #0f1724;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+.search-input::placeholder {
+    color: var(--muted);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(6, 182, 212, 0.3);
+    box-shadow: 0 8px 25px rgba(2,6,23,0.8);
+}
+
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+}
+
+/* Tool Card */
+.tool-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius);
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(2,6,23,0.8);
+}
+
+/* Tool Header */
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.tool-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-icon {
+    transform: scale(1.05);
+}
+
+.icon-gold {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.icon-cyan {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+}
+
+.icon-red {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.icon-blue {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.tool-meta {
+    display: flex;
+    gap: 8px;
+}
+
+.category-tag {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+.category-gold {
+    background: rgba(245, 158, 11, 0.15);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.category-cyan {
+    background: rgba(6, 182, 212, 0.15);
+    color: #0891b2;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.category-red {
+    background: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.category-blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #2563eb;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* Tool Content */
+.tool-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-action {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f1724;
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+
+.tool-description {
+    font-size: 14px;
+    color: #0f1724;
+    line-height: 1.35;
+    margin: 0 0 15px 0;
+    flex: 1;
+}
+
+.tool-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(90deg, var(--accent), #3b82f6);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    font-family: 'Rajdhani', system-ui, sans-serif;
+}
+
+.tool-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6,182,212,0.3);
+}
+
+.tool-cta i {
+    font-size: 12px;
+}
+
+/* No Results */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-results p {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .action-hub-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .action-hub-hero p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    .action-hub-section {
+        padding: 24px;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .search-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .action-hub-hero {
+        padding: 60px 0;
+    }
+    
+    .action-hub-hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .tool-card {
+        padding: 20px;
+    }
+    
+    .tool-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+    }
+    
+    .tool-action {
+        font-size: 18px;
+    }
+}

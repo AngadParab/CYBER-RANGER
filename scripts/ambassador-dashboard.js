@@ -189,21 +189,78 @@ function toggleModal(isOpen) {
 async function handleEventSubmit(event) {
   event.preventDefault();
   const form = elements.event.form;
+  const submitButton = form?.querySelector('button[type="submit"]');
+  
   if (!form) return;
+
+  // Get form data
   const formData = new FormData(form);
+  const title = formData.get("title")?.toString().trim();
+  const date = formData.get("date")?.toString();
+  const location = formData.get("location")?.toString().trim() || "—";
+  const status = formData.get("status")?.toString() || "Upcoming";
+
+  // Validation
+  const errors = [];
+  
+  // Check if title is empty
+  if (!title) {
+    errors.push("Event title is required");
+  }
+  
+  // Check if date is empty
+  if (!date) {
+    errors.push("Event date is required");
+  } else {
+    // Validate date format
+    const dateObj = new Date(date);
+    if (Number.isNaN(dateObj.getTime())) {
+      errors.push("Please provide a valid date");
+    }
+  }
+
+  // Show validation errors if any
+  if (errors.length > 0) {
+    alert(`Please fix the following issues:\n• ${errors.join("\n• ")}`);
+    return;
+  }
+
+  // Set loading state
+  const originalButtonText = submitButton?.innerHTML || "";
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+  }
+
+  // Prepare event data
   const newEvent = {
-    title: formData.get("title")?.toString().trim() || "Untitled",
-    date: formData.get("date")?.toString(),
-    location: formData.get("location")?.toString().trim() || "—",
-    status: formData.get("status")?.toString() || "Upcoming",
+    title: title,
+    date: date,
+    location: location,
+    status: status,
     createdAt: new Date().toISOString()
   };
+
   try {
+    // Submit to Firestore
     await addDoc(EVENTS_COLLECTION, newEvent);
+    
+    // Success: reset form and close modal
+    form.reset();
     toggleModal(false);
+    
+    // Show success feedback (optional)
+    console.log("Event added successfully");
+    
   } catch (error) {
     console.error("Failed to add event", error);
-    alert("Failed to add event. Please try again.");
+    alert("Failed to add event. Please check your connection and try again.");
+  } finally {
+    // Restore button state
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalButtonText;
+    }
   }
 }
 

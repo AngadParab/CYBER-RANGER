@@ -1743,14 +1743,15 @@ img {
 /* Mobile Responsive */
 @media (max-width: 768px) {
     #chatbot-container {
-        bottom: 15px;
+        bottom: calc(15px + env(safe-area-inset-bottom));
         right: 15px;
     }
     
     .chatbot-window {
         width: calc(100vw - 30px);
-        height: calc(100vh - 100px);
-        bottom: 90px;
+        height: 70vh;
+        max-height: 70vh;
+        bottom: calc(90px + env(safe-area-inset-bottom));
         right: 15px;
         left: 15px;
         max-width: 450px;
@@ -1774,18 +1775,51 @@ img {
         top: -3px;
         right: -3px;
     }
+    
+    /* Typography scaling for mobile */
+    .message-content {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+    
+    .message-content p {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+    
+    .message-content li {
+        font-size: 12px;
+    }
+    
+    .quick-action-btn {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+    
+    /* Keyboard handling - ensure input stays visible */
+    .chatbot-window.keyboard-open .chatbot-input-container {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        z-index: 10;
+    }
+    
+    #chatbot-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
 }
 
 @media (max-width: 480px) {
     #chatbot-container {
-        bottom: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
         right: 12px;
     }
     
     .chatbot-window {
         width: calc(100vw - 24px);
-        height: calc(100vh - 85px);
-        bottom: 80px;
+        height: 65vh;
+        max-height: 65vh;
+        bottom: calc(80px + env(safe-area-inset-bottom));
         right: 12px;
         left: 12px;
     }
@@ -1815,11 +1849,12 @@ img {
     
     .chatbot-input-container {
         padding: 12px 15px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
     }
     
     .quick-action-btn {
-        font-size: 11px;
-        padding: 5px 10px;
+        font-size: 10px;
+        padding: 4px 8px;
     }
     
     .chatbot-header {
@@ -1833,6 +1868,25 @@ img {
     .chatbot-btn {
         width: 28px;
         height: 28px;
+    }
+    
+    /* Additional typography scaling for smaller screens */
+    .message-content {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .message-content p {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+    
+    .message-content li {
+        font-size: 11px;
+    }
+    
+    #chatbot-input {
+        font-size: 16px; /* Prevents zoom on iOS */
     }
 }
 

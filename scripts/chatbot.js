@@ -53,6 +53,19 @@ class CyberRangerChatbot {
                 this.closeChatbot();
             }
         });
+        
+        // Mobile keyboard handling to keep input visible
+        this.input.addEventListener('focus', () => this.handleKeyboardOpen());
+        this.input.addEventListener('blur', () => this.handleKeyboardClose());
+        
+        // Handle visual viewport changes (for mobile browsers that support it)
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', () => {
+                if (this.isOpen && document.activeElement === this.input) {
+                    this.handleKeyboardOpen();
+                }
+            });
+        }
     }
 
     toggleChatbot() {
@@ -284,6 +297,30 @@ class CyberRangerChatbot {
 
     containsAny(str, keywords) {
         return keywords.some(keyword => str.includes(keyword));
+    }
+
+    handleKeyboardOpen() {
+        // Ensure input container is visible when keyboard opens
+        if (window.innerWidth <= 768) {
+            const inputContainer = this.input.closest('.chatbot-input-container');
+            if (inputContainer) {
+                // Scroll input into view
+                setTimeout(() => {
+                    inputContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    this.input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+                
+                // Add class for CSS adjustments if needed
+                this.window.classList.add('keyboard-open');
+            }
+        }
+    }
+
+    handleKeyboardClose() {
+        // Remove keyboard-open class when keyboard closes
+        if (window.innerWidth <= 768) {
+            this.window.classList.remove('keyboard-open');
+        }
     }
 
     scrollToBottom() {

@@ -55,9 +55,106 @@
 
         <main class="courses-main">
             <section class="grid" id="coursesGrid" aria-live="polite">
-                <!-- Course cards will be injected by JavaScript -->
+                <a href="Learning Resources/level1.html" class="card-link">
+                    <div class="card">
+                        <div class="level-badge">Level 1</div>
+                        <div class="card-header">
+                            <h3>The Essentials</h3>
+                        </div>
+                        <div class="summary">Master essential cybersecurity skills to protect yourself and others in the digital world.</div>
+                        <div class="course-topics">
+                            <strong>Key Topics:</strong>
+                            <ul>
+                                <li>Phishing False Urgency</li>
+                                <li></li>
+                                <li>Strong Passwords</li>
+                                <li>MFA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                <a href="Learning Resources/level2.html" class="card-link">
+                    <div class="card">
+                        <div class="level-badge">Level 2</div>
+                        <div class="card-header">
+                            <h3>Social & Financial</h3>
+                        </div>
+                        <div class="summary">Master essential cybersecurity skills to protect yourself and others in the digital world.</div>
+                        <div class="course-topics">
+                            <strong>Key Topics:</strong>
+                            <ul>
+                                <li>UPI/QR scams</li>
+                                <li>Social Media Privacy</li>
+                                <li>Public Wi-Fi traps</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                <a href="Learning Resources/level3.html" class="card-link">
+                    <div class="card">
+                        <div class="level-badge">Level 3</div>
+                        <div class="card-header">
+                            <h3>Modern AI Threats</h3>
+                        </div>
+                        <div class="summary">Master essential cybersecurity skills to protect yourself and others in the digital world.</div>
+                        <div class="course-topics">
+                            <strong>Key Topics:</strong>
+                            <ul>
+                                <li>Deepfakes</li>
+                                <li>Voice Cloning</li>
+                                <li>Malicious App Permissions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                <a href="Learning Resources/level4.html" class="card-link">
+                    <div class="card">
+                        <div class="level-badge">Level 4</div>
+                        <div class="card-header">
+                            <h3>Corporate & Community</h3>
+                        </div>
+                        <div class="summary">Master essential cybersecurity skills to protect yourself and others in the digital world.</div>
+                        <div class="course-topics">
+                            <strong>Key Topics:</strong>
+                            <ul>
+                                <li>Tailgating</li>
+                                <li>Physical Security</li>
+                                <li>Software Updates</li>
+                                <li>Reporting Cybercrime</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                <a href="Learning Resources/other resources links .html" class="card-link">
+                    <div class="card">
+                        <div class="level-badge">Level 4</div>
+                        <div class="card-header">
+                            <h3>Corporate & Community</h3>
+                        </div>
+                        <div class="summary">Master essential cybersecurity skills to protect yourself and others in the digital world.</div>
+                        <div class="course-topics">
+                            <strong>Key Topics:</strong>
+                            <ul>
+                                <li>Tailgating</li>
+                                <li>Physical Security</li>
+                                <li>Software Updates</li>
+                                <li>Reporting Cybercrime</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
             </section>
         </main>
+    </section>
+
+    <!-- Topic Detail View -->
+    <section class="topic-detail-view" id="topicDetailView" style="display: none;">
+        <div class="container">
+            <button id="backToLevels" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Levels</button>
+            <div id="topicContent">
+                <!-- Dynamic content will be populated here -->
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -151,7 +248,6 @@
 
     <script type="module" src="../scripts/firebase-config.js"></script>
     <script src="../scripts/main.js"></script>
-    <script src="../scripts/courses.js"></script>
     <script src="../scripts/chatbot.js"></script>
 </body>
 </html>

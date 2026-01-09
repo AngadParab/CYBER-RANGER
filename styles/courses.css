@@ -1,12 +1,25 @@
-/* Courses Page Specific Styles - Modern Design */
+/* Courses Page Specific Styles - Matching Main Theme */
 :root {
-    --bg: #e6fff3; /* Using light from main.css */
-    --card: #ffffff;
-    --accent: #06b6d4;
-    --muted: #94a3b8;
-    --glass: rgba(255,255,255,0.03);
-    --radius: 14px;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --primary: #000000;
+    --secondary: #27ae60;
+    --accent: #e74c3c;
+    --light: #e6fff3;
+    --dark: #0d3d0d;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --gray: #95a5a6;
+    --light-gray: #d4f8e8;
+    --dark-gray: #7f8c8d;
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+    --bg: var(--light); /* Light background */
+    --card: var(--light-gray); /* Light gray for cards */
+    --muted: var(--dark-gray); /* Dark gray text */
+    --glass: rgba(39, 174, 96, 0.1);
+    --radius: var(--border-radius);
+    font-family: 'Rajdhani', sans-serif;
 }
 
 * {
@@ -16,7 +29,7 @@
 body {
     margin: 0;
     background: var(--bg);
-    color: #0f1724;
+    color: var(--primary);
     min-height: 100vh;
 }
 
@@ -70,14 +83,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #021024;
+    color: var(--primary);
     font-size: 1.5rem;
 }
 
 .logo-section h2 {
     margin: 0;
     font-size: 20px;
-    color: #0f1724;
+    color: var(--primary);
 }
 
 .logo-section .lead {
@@ -105,13 +118,13 @@ body {
 
 .controls .btn.active {
     background: linear-gradient(90deg, var(--accent), #3b82f6);
-    color: #021024;
+    color: var(--primary);
     border: none;
 }
 
 .controls .btn:hover {
     background: linear-gradient(90deg, var(--accent), #3b82f6);
-    color: #021024;
+    color: var(--primary);
     border: none;
 }
 
@@ -165,7 +178,7 @@ body {
 .card-header h3 {
     margin: 0 0 6px;
     font-size: 16px;
-    color: #0f1724;
+    color: var(--primary);
     flex: 1;
 }
 
@@ -191,7 +204,7 @@ body {
 
 .summary {
     margin: 12px 0;
-    color: #0f1724;
+    color: var(--primary);
     font-size: 14px;
     line-height: 1.35;
 }
@@ -214,7 +227,7 @@ body {
 .tips ul {
     margin: 8px 0 0 18px;
     padding: 0;
-    color: #0f1724;
+    color: var(--primary);
 }
 
 .tips li {
@@ -249,7 +262,7 @@ body {
 }
 
 .reference a:hover {
-    color: #3b82f6;
+    color: var(--accent);
     text-decoration: underline;
 }
 
@@ -267,7 +280,7 @@ body {
 
 .course-level {
     background: rgba(34,197,94,0.1);
-    color: #22c55e;
+    color: var(--success);
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 11px;
@@ -290,7 +303,7 @@ body {
 .course-topics ul {
     margin: 8px 0 0 18px;
     padding: 0;
-    color: #0f1724;
+    color: var(--primary);
 }
 
 .course-topics li {
@@ -303,29 +316,188 @@ body {
     margin-bottom: 0;
 }
 
+/* Topic Detail View */
+.topic-detail-view {
+    background: var(--bg);
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.back-btn {
+    background: var(--primary);
+    color: var(--secondary);
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background: var(--accent);
+    color: var(--primary);
+    transform: translateX(-5px);
+}
+
+#topicContent h2 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#topicContent .topics-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+#topicContent .topic-item {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 2px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+#topicContent .topic-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+}
+
+#topicContent .topic-item h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#topicContent .resources {
+    margin-top: 30px;
+}
+
+#topicContent .resources h3 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#topicContent .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+#topicContent .resource-item {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    border-left: 5px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+#topicContent .resource-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+}
+
+#topicContent .resource-item .resource-type {
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#topicContent .resource-item h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+#topicContent .resource-item a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#topicContent .resource-item a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+/* Level Badge */
+.level-badge {
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+/* Card Hover Effects */
+.card {
+    cursor: pointer;
+}
+
+.card:hover {
+    border-color: var(--accent);
+}
+
 /* Responsive Design */
-@media (max-width: 520px) {
+@media (max-width: 768px) {
     .courses-header {
         padding: 18px;
     }
-    
+
     .cyber-icon {
         width: 52px;
         height: 52px;
     }
-    
+
     .grid {
         grid-template-columns: 1fr;
     }
-    
+
     .card-header {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .controls {
         margin-left: 0;
         margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #topicContent .topics-list,
+    #topicContent .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #topicContent h2 {
+        font-size: 2rem;
+    }
+
+    .back-btn {
         width: 100%;
         justify-content: center;
     }

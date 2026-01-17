@@ -209,113 +209,6 @@ body {
     line-height: 1.35;
 }
 
-.tips {
-    background: rgba(6,182,212,0.05);
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px dashed rgba(6,182,212,0.08);
-    margin-top: 15px;
-}
-
-.tips strong {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.tips ul {
-    margin: 8px 0 0 18px;
-    padding: 0;
-    color: var(--primary);
-}
-
-.tips li {
-    margin-bottom: 5px;
-    line-height: 1.4;
-    font-size: 13px;
-}
-
-.tips li:last-child {
-    margin-bottom: 0;
-}
-
-.reference {
-    margin-top: 15px;
-    padding: 10px;
-    background: rgba(6,182,212,0.05);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent);
-    font-size: 13px;
-}
-
-.reference strong {
-    color: var(--accent);
-    margin-right: 8px;
-}
-
-.reference a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.reference a:hover {
-    color: var(--accent);
-    text-decoration: underline;
-}
-
-/* Course specific styles */
-.course-duration {
-    background: rgba(6,182,212,0.1);
-    color: var(--accent);
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.course-level {
-    background: rgba(34,197,94,0.1);
-    color: var(--success);
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.course-topics {
-    margin-top: 12px;
-}
-
-.course-topics strong {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.course-topics ul {
-    margin: 8px 0 0 18px;
-    padding: 0;
-    color: var(--primary);
-}
-
-.course-topics li {
-    margin-bottom: 5px;
-    line-height: 1.4;
-    font-size: 13px;
-}
-
-.course-topics li:last-child {
-    margin-bottom: 0;
-}
-
 /* Topic Detail View */
 .topic-detail-view {
     background: var(--bg);
@@ -501,4 +394,162 @@ body {
         width: 100%;
         justify-content: center;
     }
+}
+/* --- NEW MODERN CARD LAYOUT --- */
+
+/* The Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly wider cards */
+    gap: 24px;
+    padding: 20px 0;
+}
+
+/* The Card Container */
+.cyber-card {
+    position: relative;
+    background: #ffffff; /* Clean white background */
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Soft modern shadow */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Top Color Bar (The "Cyber" Line) */
+.card-decoration {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+/* Content Padding */
+.card-body {
+    padding: 24px;
+    position: relative;
+}
+
+/* Giant Level Number (Watermark style) */
+.level-number {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(0,0,0,0.03); /* Very subtle watermark */
+    line-height: 1;
+    z-index: 0;
+    transition: all 0.4s ease;
+}
+
+/* Header Area */
+.card-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+    background: rgba(39, 174, 96, 0.1); /* Light Green bg */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.summary {
+    position: relative;
+    z-index: 1;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Modern Pill Tags (Instead of bullet points) */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto; /* Pushes tags down */
+}
+
+.tech-tags span {
+    background: rgba(255,255,255,0.1);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tech-tags span i {
+    color: var(--secondary);
+    font-size: 0.7rem;
+}
+
+/* Footer "Action" Area */
+.card-footer {
+    padding: 16px 24px;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+/* --- HOVER EFFECTS (The Magic) --- */
+
+.card-link {
+    text-decoration: none; /* Remove underline from link */
+    display: block; /* Make link fill grid cell */
+}
+
+.card-link:hover .cyber-card {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(39, 174, 96, 0.15); /* Green glow shadow */
+    border-color: var(--secondary);
+}
+
+.card-link:hover .level-number {
+    color: rgba(39, 174, 96, 0.1); /* Light up the number */
+    transform: scale(1.1);
+}
+
+.card-link:hover .card-footer {
+    background: var(--secondary);
+    color: white; /* Footer turns green */
+}
+
+.card-link:hover .card-decoration {
+    transform: scaleX(1.1); /* Bar grows slightly */
 }

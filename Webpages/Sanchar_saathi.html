@@ -38,26 +38,269 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="sanchar-hero">
+    <!-- App Showcase Section -->
+    <section class="app-showcase">
         <div class="container">
-            <div class="hero-content">
-                <h1><i class="fas fa-mobile-alt"></i> Sanchar Saathi</h1>
-                <p>Empowering Citizens, Securing Telecom. A citizen-centric initiative by the Department of Telecommunications (DoT), Government of India to secure mobile connections and increase awareness about telecom-related cyber threats.</p>
+            <div class="showcase-grid">
+                <!-- Column 1: Text & Features -->
+                <div class="content-column">
+                    <h1 class="showcase-headline">
+                        <i class="fas fa-mobile-alt"></i> Your Mobile Security Companion
+                    </h1>
+                    <p class="showcase-description">
+                        Sanchar Saathi is a citizen-centric initiative by the Department of Telecommunications (DoT), Government of India. 
+                        Empowering mobile subscribers to secure their connections and increase awareness about telecom-related cyber threats. 
+                        Take control of your mobile security with powerful tools designed to protect you from fraud and unauthorized access.
+                    </p>
+
+                    <!-- Feature List -->
+                    <div class="feature-list">
+                        <div class="feature-card active" data-screen="home">
+                            <div class="feature-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Home Screen</h3>
+                                <p class="feature-description">Explore all available features</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-screen="block">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-slash"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Block Stolen Phone</h3>
+                                <p class="feature-description">Report and block your lost or stolen device</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-screen="connections">
+                            <div class="feature-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Know Your Connections</h3>
+                                <p class="feature-description">View all mobile numbers registered in your name</p>
+                            </div>
+                        </div>
+                        <div class="feature-card" data-screen="fraud">
+                            <div class="feature-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">Report Fraud</h3>
+                                <p class="feature-description">Report suspicious calls, SMS, and WhatsApp messages</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download Buttons -->
+                    <div class="download-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.dot.app.sancharsaathi" target="_blank" class="download-btn android-btn">
+                            <i class="fab fa-google-play"></i>
+                            <div class="btn-text">
+                                <span class="btn-label">Download for</span>
+                                <span class="btn-platform">Android</span>
+                            </div>
+                        </a>
+                        <a href="https://apps.apple.com/in/app/sanchar-saathi/id6739700695" target="_blank" class="download-btn ios-btn">
+                            <i class="fab fa-apple"></i>
+                            <div class="btn-text">
+                                <span class="btn-label">Download for</span>
+                                <span class="btn-platform">iOS</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Phone Mockup -->
+                <div class="phone-column">
+                    <div class="phone-frame">
+                        <!-- Notch -->
+                        <div class="phone-notch"></div>
+                        
+                        <!-- Screen -->
+                        <div class="phone-screen">
+                            <!-- Home Screen -->
+                            <div id="screen-home" class="app-view active">
+                                <div class="app-ui">
+                                    <!-- App Header -->
+                                    <div class="app-header">
+                                        <div class="app-title">Sanchar Saathi</div>
+                                        <div class="app-menu">
+                                            <i class="fas fa-bars"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- App Grid -->
+                                    <div class="app-grid">
+                                        <!-- CEIR App Icon -->
+                                        <div class="app-icon">
+                                            <div class="icon-container ceir-icon">
+                                                <i class="fas fa-mobile-slash"></i>
+                                            </div>
+                                            <span class="icon-label">CEIR</span>
+                                        </div>
+
+                                        <!-- TAFCOP App Icon -->
+                                        <div class="app-icon">
+                                            <div class="icon-container tafcop-icon">
+                                                <i class="fas fa-sim-card"></i>
+                                            </div>
+                                            <span class="icon-label">TAFCOP</span>
+                                        </div>
+
+                                        <!-- CHAKSHU App Icon -->
+                                        <div class="app-icon">
+                                            <div class="icon-container chakshu-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <span class="icon-label">CHAKSHU</span>
+                                        </div>
+
+                                        <!-- KYI App Icon -->
+                                        <div class="app-icon">
+                                            <div class="icon-container kyi-icon">
+                                                <i class="fas fa-network-wired"></i>
+                                            </div>
+                                            <span class="icon-label">KYI</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Block Stolen Phone Screen -->
+                            <div id="screen-block" class="app-view">
+                                <div class="screen-content">
+                                    <div class="screen-header">
+                                        <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                                        <h2 class="screen-title">Block Stolen Phone</h2>
+                                        <div class="header-spacer"></div>
+                                    </div>
+                                    <div class="screen-body">
+                                        <div class="feature-illustration">
+                                            <i class="fas fa-mobile-slash"></i>
+                                        </div>
+                                        <h3 class="screen-subtitle">CEIR - Central Equipment Identity Register</h3>
+                                        <p class="screen-text">Report your lost or stolen mobile device to block it from being used on any network.</p>
+                                        <div class="action-buttons">
+                                            <button class="primary-btn">
+                                                <i class="fas fa-shield-alt"></i>
+                                                Block Device
+                                            </button>
+                                            <button class="secondary-btn">
+                                                <i class="fas fa-search"></i>
+                                                Check Status
+                                            </button>
+                                        </div>
+                                        <div class="info-box">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Your device will be blocked across all networks in India</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Know Your Connections Screen -->
+                            <div id="screen-connections" class="app-view">
+                                <div class="screen-content">
+                                    <div class="screen-header">
+                                        <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                                        <h2 class="screen-title">Your Connections</h2>
+                                        <div class="header-spacer"></div>
+                                    </div>
+                                    <div class="screen-body">
+                                        <div class="feature-illustration">
+                                            <i class="fas fa-network-wired"></i>
+                                        </div>
+                                        <h3 class="screen-subtitle">TAFCOP - Telecom Analytics for Fraud Management</h3>
+                                        <p class="screen-text">View all mobile numbers registered in your name across all operators.</p>
+                                        <div class="connections-list">
+                                            <div class="connection-item">
+                                                <div class="connection-icon">
+                                                    <i class="fas fa-sim-card"></i>
+                                                </div>
+                                                <div class="connection-details">
+                                                    <div class="connection-number">+91 98765 43210</div>
+                                                    <div class="connection-operator">Airtel</div>
+                                                </div>
+                                                <div class="connection-status active">Active</div>
+                                            </div>
+                                            <div class="connection-item">
+                                                <div class="connection-icon">
+                                                    <i class="fas fa-sim-card"></i>
+                                                </div>
+                                                <div class="connection-details">
+                                                    <div class="connection-number">+91 98765 43211</div>
+                                                    <div class="connection-operator">Jio</div>
+                                                </div>
+                                                <div class="connection-status active">Active</div>
+                                            </div>
+                                            <div class="connection-item">
+                                                <div class="connection-icon">
+                                                    <i class="fas fa-sim-card"></i>
+                                                </div>
+                                                <div class="connection-details">
+                                                    <div class="connection-number">+91 98765 43212</div>
+                                                    <div class="connection-operator">Vi</div>
+                                                </div>
+                                                <div class="connection-status inactive">Inactive</div>
+                                            </div>
+                                        </div>
+                                        <button class="primary-btn full-width">
+                                            <i class="fas fa-sync"></i>
+                                            Refresh List
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Report Fraud Screen -->
+                            <div id="screen-fraud" class="app-view">
+                                <div class="screen-content">
+                                    <div class="screen-header">
+                                        <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                                        <h2 class="screen-title">Report Fraud</h2>
+                                        <div class="header-spacer"></div>
+                                    </div>
+                                    <div class="screen-body">
+                                        <div class="feature-illustration">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <h3 class="screen-subtitle">CHAKSHU - Report Suspected Fraud</h3>
+                                        <p class="screen-text">Report suspicious calls, SMS, and WhatsApp messages to help protect others.</p>
+                                        <div class="report-options">
+                                            <button class="report-option-btn">
+                                                <i class="fas fa-phone"></i>
+                                                <span>Suspicious Call</span>
+                                            </button>
+                                            <button class="report-option-btn">
+                                                <i class="fas fa-sms"></i>
+                                                <span>Suspicious SMS</span>
+                                            </button>
+                                            <button class="report-option-btn">
+                                                <i class="fab fa-whatsapp"></i>
+                                                <span>WhatsApp Message</span>
+                                            </button>
+                                        </div>
+                                        <div class="report-form">
+                                            <input type="text" class="form-input" placeholder="Enter phone number">
+                                            <textarea class="form-textarea" placeholder="Describe the incident..."></textarea>
+                                            <button class="primary-btn full-width">
+                                                <i class="fas fa-paper-plane"></i>
+                                                Submit Report
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Home Indicator (iPhone style) -->
+                        <div class="home-indicator"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Main Content Section -->
-    <section class="sanchar-section">
-        <header class="sanchar-header">
-        </header>
-
-        <main class="sanchar-main">
-            <section class="grid" id="sancharGrid" aria-live="polite">
-                <!-- Content cards will be injected by JavaScript -->
-            </section>
-        </main>
     </section>
 
     <!-- Footer -->
@@ -151,7 +394,7 @@
 
     <script type="module" src="../scripts/firebase-config.js"></script>
     <script src="../scripts/main.js"></script>
-    <script src="../scripts/sanchar.js"></script>
     <script src="../scripts/chatbot.js"></script>
+    <script src="../scripts/sanchar.js"></script>
 </body>
 </html>

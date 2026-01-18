@@ -40,25 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    /* --- PART 2: ADVANCED 3D TILT EFFECT --- */
-    const phoneFrame = document.querySelector('.phone-frame');
-    const showcaseSection = document.querySelector('.app-showcase');
-
-    if (phoneFrame && showcaseSection) {
-        showcaseSection.addEventListener('mousemove', (e) => {
-            // 1. Calculate mouse position relative to the section
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25; // Divide to control sensitivity
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-
-            // 2. Rotate the phone based on mouse position
-            phoneFrame.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-
-        // 3. Reset position when mouse leaves
-        showcaseSection.addEventListener('mouseleave', () => {
-            phoneFrame.style.transform = 'rotateY(0deg) rotateX(0deg)';
-        });
-    }
-
-    console.log('Sanchar Saathi: 3D Tilt & Animations Active 🚀');
+   
+   
 });

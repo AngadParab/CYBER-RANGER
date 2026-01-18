@@ -855,3 +855,6 @@ body {
     pointer-events: none; /* Let clicks pass through */
     z-index: 20;
 }
+.brand-sanchar { color: #003366; font-weight: 800; font-size: 1rem; text-transform: uppercase; }
+.brand-saathi { color: #FF9933; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-left: 2px; }
+.app-logo-img { height: 35px; width: auto; }

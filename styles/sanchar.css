@@ -810,20 +810,7 @@ body {
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Only animate when the screen is active */
-.app-view.active .app-icon, 
-.app-view.active .sim-card-item,
-.app-view.active .feature-illustration {
-    opacity: 0; /* Hidden initially */
-    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-/* Stagger delays (Icon 1 appears, then Icon 2, etc.) */
-.app-view.active .app-icon:nth-child(1) { animation-delay: 0.1s; }
-.app-view.active .app-icon:nth-child(2) { animation-delay: 0.2s; }
-.app-view.active .app-icon:nth-child(3) { animation-delay: 0.3s; }
-.app-view.active .app-icon:nth-child(4) { animation-delay: 0.4s; }
-
+/* Stagger delays for sim-card-items if needed */
 .app-view.active .sim-card-item:nth-child(1) { animation-delay: 0.2s; }
 .app-view.active .sim-card-item:nth-child(2) { animation-delay: 0.3s; }
 
@@ -873,6 +860,7 @@ body {
     line-height: 1;
     background: linear-gradient(90deg, #003366, #00509d); /* Official Blue Gradient */
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
 }
@@ -907,3 +895,18 @@ body {
         font-size: 1rem;
     }
 }
+/* --- ANIMATION FIXES (Essential for Screens to Appear) --- */
+/* Apply animation when screen becomes active */
+.app-view.active .app-icon, 
+.app-view.active .feature-illustration,
+.app-view.active .connection-item,
+.app-view.active .report-option-btn {
+    opacity: 0; /* Start hidden */
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered delays for a professional feel */
+.app-view.active .app-icon:nth-child(1) { animation-delay: 0.1s; }
+.app-view.active .app-icon:nth-child(2) { animation-delay: 0.2s; }
+.app-view.active .app-icon:nth-child(3) { animation-delay: 0.3s; }
+.app-view.active .app-icon:nth-child(4) { animation-delay: 0.4s; }

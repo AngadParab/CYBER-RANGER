@@ -58,43 +58,48 @@
     </p>
                     <!-- Feature List -->
                     <div class="feature-list">
-                        <div class="feature-card active" data-screen="home">
-                            <div class="feature-icon">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h3 class="feature-title">Home Screen</h3>
-                                <p class="feature-description">Explore all available features</p>
-                            </div>
-                        </div>
-                        <div class="feature-card" data-screen="block">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-slash"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h3 class="feature-title">Block Stolen Phone</h3>
-                                <p class="feature-description">Report and block your lost or stolen device</p>
-                            </div>
-                        </div>
-                        <div class="feature-card" data-screen="connections">
-                            <div class="feature-icon">
-                                <i class="fas fa-network-wired"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h3 class="feature-title">Know Your Connections</h3>
-                                <p class="feature-description">View all mobile numbers registered in your name</p>
-                            </div>
-                        </div>
-                        <div class="feature-card" data-screen="fraud">
-                            <div class="feature-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h3 class="feature-title">Report Fraud</h3>
-                                <p class="feature-description">Report suspicious calls, SMS, and WhatsApp messages</p>
-                            </div>
-                        </div>
-                    </div>
+    
+    <div class="feature-card active" data-screen="home">
+        <div class="feature-icon">
+            <i class="fas fa-home"></i> 
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Home Screen</h3>
+            <p class="feature-description">Explore all available features</p>
+        </div>
+    </div>
+
+    <div class="feature-card" data-screen="block">
+        <div class="feature-icon">
+            <img src="../assets/icons/block.png" alt="Block Phone" class="sidebar-icon-img">
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Block Stolen Phone</h3>
+            <p class="feature-description">Report and block your lost or stolen device</p>
+        </div>
+    </div>
+
+    <div class="feature-card" data-screen="connections">
+        <div class="feature-icon">
+            <img src="../assets/icons/sim.png" alt="Connections" class="sidebar-icon-img">
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">TAFCOP - Know Your Connections</h3>
+            <p class="feature-description">View all mobile numbers registered in your name</p>
+        </div>
+    </div>
+
+    <div class="feature-card" data-screen="fraud">
+        <div class="feature-icon">
+            <img src="../assets/icons/chakshu.png" alt="Report Fraud" class="sidebar-icon-img">
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Report Fraud</h3>
+            <p class="feature-description">Report suspicious calls, SMS, and WhatsApp messages</p>
+        </div>
+    </div>
+
+</div>
 
                     <!-- Download Buttons -->
                     <div class="download-buttons">
@@ -186,20 +191,23 @@
                                     </div>
                                     <div class="screen-body">
                                         <div class="feature-illustration">
-                                            <i class="fas fa-mobile-slash"></i>
+                                          <img src="../assets/icons/block.png" alt="Block Phone2" class="screen-icon-img">
                                         </div>
                                         <h3 class="screen-subtitle">CEIR - Central Equipment Identity Register</h3>
                                         <p class="screen-text">Report your lost or stolen mobile device to block it from being used on any network.</p>
-                                        <div class="action-buttons">
-                                            <button class="primary-btn">
-                                                <i class="fas fa-shield-alt"></i>
-                                                Block Device
-                                            </button>
-                                            <button class="secondary-btn">
-                                                <i class="fas fa-search"></i>
-                                                Check Status
-                                            </button>
-                                        </div>
+                                       <div class="action-buttons">
+    
+    <a href="https://ceir.sancharsaathi.gov.in/Request/CeirUserBlockRequestDirect.jsp" target="_blank" class="primary-btn" style="text-decoration: none;">
+        <i class="fas fa-shield-alt"></i>
+        Block Device
+    </a>
+
+    <a href="https://ceir.sancharsaathi.gov.in/Request/CeirRequestStatus.jsp " target="_blank" class="secondary-btn" style="text-decoration: none;">
+       <i class="fas fa-search"></i>
+        Check Status
+    </a>
+
+</div>
                                         <div class="info-box">
                                             <i class="fas fa-info-circle"></i>
                                             <span>Your device will be blocked across all networks in India</span>
@@ -210,98 +218,147 @@
 
                             <!-- Know Your Connections Screen -->
                             <div id="screen-connections" class="app-view">
-                                <div class="screen-content">
-                                    <div class="screen-header">
-                                        <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                                        <h2 class="screen-title">Your Connections</h2>
-                                        <div class="header-spacer"></div>
-                                    </div>
-                                    <div class="screen-body">
-                                        <div class="feature-illustration">
-                                            <i class="fas fa-network-wired"></i>
-                                        </div>
-                                        <h3 class="screen-subtitle">TAFCOP - Telecom Analytics for Fraud Management</h3>
-                                        <p class="screen-text">View all mobile numbers registered in your name across all operators.</p>
-                                        <div class="connections-list">
-                                            <div class="connection-item">
-                                                <div class="connection-icon">
-                                                    <i class="fas fa-sim-card"></i>
-                                                </div>
-                                                <div class="connection-details">
-                                                    <div class="connection-number">+91 98765 43210</div>
-                                                    <div class="connection-operator">Airtel</div>
-                                                </div>
-                                                <div class="connection-status active">Active</div>
-                                            </div>
-                                            <div class="connection-item">
-                                                <div class="connection-icon">
-                                                    <i class="fas fa-sim-card"></i>
-                                                </div>
-                                                <div class="connection-details">
-                                                    <div class="connection-number">+91 98765 43211</div>
-                                                    <div class="connection-operator">Jio</div>
-                                                </div>
-                                                <div class="connection-status active">Active</div>
-                                            </div>
-                                            <div class="connection-item">
-                                                <div class="connection-icon">
-                                                    <i class="fas fa-sim-card"></i>
-                                                </div>
-                                                <div class="connection-details">
-                                                    <div class="connection-number">+91 98765 43212</div>
-                                                    <div class="connection-operator">Vi</div>
-                                                </div>
-                                                <div class="connection-status inactive">Inactive</div>
-                                            </div>
-                                        </div>
-                                        <button class="primary-btn full-width">
-                                            <i class="fas fa-sync"></i>
-                                            Refresh List
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="screen-content">
+        
+        <div class="screen-header">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2 class="screen-title">My Connections</h2>
+            <div class="header-spacer"></div>
+        </div>
+
+        <div class="screen-body custom-body-padding">
+            
+            <div class="tafcop-header-card">
+                <div class="stat-row">
+                    <div class="big-stat">02</div>
+                    <div class="stat-desc">
+                        <span>Numbers Linked</span>
+                        <small>to your Aadhaar ID</small>
+                        <small>792x xxxx xx57</small>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+            </div>
+
+            <div class="connections-list-modern">
+                
+                <div class="sim-card-modern">
+                    <div class="sim-visual airtel-gradient">
+                        <div class="sim-chip"></div>
+                        <span class="sim-brand">Airtel</span>
+                    </div>
+                    <div class="sim-data">
+                        <div class="sim-number">+91 1234567890</div>
+                        <div class="sim-meta">
+                            <span class="status-badge active">Active</span>
+                            <span class="region-text">Goa & Maharashtra</span>
+                        </div>
+                    </div>
+                    <div class="sim-action">
+                        <button class="alert-btn" title="This is not my number">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sim-card-modern">
+                    <div class="sim-visual jio-gradient">
+                        <div class="sim-chip"></div>
+                        <span class="sim-brand">Jio</span>
+                    </div>
+                    <div class="sim-data">
+                        <div class="sim-number">+91 0987654321</div>
+                        <div class="sim-meta">
+                            <span class="status-badge active">Active</span>
+                            <span class="region-text">Goa & Maharashtra</span>
+                        </div>
+                    </div>
+                    <div class="sim-action">
+                        <button class="alert-btn" title="This is not my number">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="bottom-action-area">
+                <a href="https://tafcop.sancharsaathi.gov.in/" target="_blank" class="primary-btn full-width">
+                    <i class="fas fa-external-link-alt"></i>
+                    Visit Official Portal
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
 
                             <!-- Report Fraud Screen -->
-                            <div id="screen-fraud" class="app-view">
-                                <div class="screen-content">
-                                    <div class="screen-header">
-                                        <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
-                                        <h2 class="screen-title">Report Fraud</h2>
-                                        <div class="header-spacer"></div>
-                                    </div>
-                                    <div class="screen-body">
-                                        <div class="feature-illustration">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </div>
-                                        <h3 class="screen-subtitle">CHAKSHU - Report Suspected Fraud</h3>
-                                        <p class="screen-text">Report suspicious calls, SMS, and WhatsApp messages to help protect others.</p>
-                                        <div class="report-options">
-                                            <button class="report-option-btn">
-                                                <i class="fas fa-phone"></i>
-                                                <span>Suspicious Call</span>
-                                            </button>
-                                            <button class="report-option-btn">
-                                                <i class="fas fa-sms"></i>
-                                                <span>Suspicious SMS</span>
-                                            </button>
-                                            <button class="report-option-btn">
-                                                <i class="fab fa-whatsapp"></i>
-                                                <span>WhatsApp Message</span>
-                                            </button>
-                                        </div>
-                                        <div class="report-form">
-                                            <input type="text" class="form-input" placeholder="Enter phone number">
-                                            <textarea class="form-textarea" placeholder="Describe the incident..."></textarea>
-                                            <button class="primary-btn full-width">
-                                                <i class="fas fa-paper-plane"></i>
-                                                Submit Report
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                          <div id="screen-fraud" class="app-view">
+    <div class="screen-content">
+        
+        <div class="screen-header">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2 class="screen-title">Report Fraud</h2>
+            <div class="header-spacer"></div>
+        </div>
+
+        <div class="screen-body custom-body-padding">
+            
+            <div class="chakshu-status-card">
+                <div class="scanner-animation">
+                    <div class="pulse-ring"></div>
+                    <img src="../assets/icons/chakshu.png" alt="Chakshu Scan" class="scanner-img">
+                </div>
+                <div class="status-text">
+                    <h3> Chakshu </h3>
+                    <small class="live-tag">Report Fraud </small>
+                </div>
+            </div>
+
+            <p class="section-title">Select Threat Type</p>
+
+            <div class="fraud-category-grid">
+                
+                <div class="fraud-tile">
+                    <div class="tile-icon icon-call">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <span class="tile-name">Voice Call</span>
+                </div>
+
+                <div class="fraud-tile">
+                    <div class="tile-icon icon-sms">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <span class="tile-name">Spam SMS</span>
+                </div>
+
+                <div class="fraud-tile">
+                    <div class="tile-icon icon-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span class="tile-name">WhatsApp</span>
+                </div>
+
+                <div class="fraud-tile">
+                    <div class="tile-icon icon-link">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <span class="tile-name">Phishing Link</span>
+                </div>
+
+            </div>
+
+            <a href="https://sancharsaathi.gov.in/sfc/" target="_blank" class="primary-btn full-width report-btn">
+                <i class="fas fa-bolt"></i>
+                Report Incident Now
+            </a>
+
+        </div>
+    </div>
+</div>
 
                         <!-- Home Indicator (iPhone style) -->
                         <div class="home-indicator"></div>

@@ -910,3 +910,262 @@ body {
 .app-view.active .app-icon:nth-child(2) { animation-delay: 0.2s; }
 .app-view.active .app-icon:nth-child(3) { animation-delay: 0.3s; }
 .app-view.active .app-icon:nth-child(4) { animation-delay: 0.4s; }
+/* --- NEW TAFCOP UI STYLES --- */
+
+/* 1. Stats Header */
+.tafcop-header-card {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 20px;
+    border-radius: 16px;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.big-stat {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #38bdf8;
+}
+
+.stat-desc {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-desc span { font-weight: 600; font-size: 1rem; }
+.stat-desc small { color: #94a3b8; font-size: 0.8rem; }
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #38bdf8;
+    border-radius: 3px;
+}
+
+/* 2. Modern SIM Cards List */
+.connections-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.sim-card-modern {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease;
+}
+
+.sim-card-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* The Graphic SIM Chip part */
+.sim-visual {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.sim-chip {
+    width: 24px;
+    height: 16px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    border-radius: 3px;
+    margin-bottom: 4px;
+    position: relative;
+}
+/* Little lines on the chip */
+.sim-chip::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; width: 100%; height: 1px;
+    background: rgba(0,0,0,0.1);
+}
+.sim-chip::before {
+    content: '';
+    position: absolute;
+    left: 33%; top: 0; width: 33%; height: 100%;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.sim-brand { font-size: 0.6rem; color: white; font-weight: 700; text-transform: uppercase; }
+
+/* Gradients for Operators */
+.airtel-gradient { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.jio-gradient    { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+
+/* Text Details */
+.sim-data { flex: 1; }
+.sim-number { font-weight: 700; color: #0f1724; font-size: 0.95rem; }
+.sim-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.region-text { font-size: 0.75rem; color: #64748b; }
+
+.status-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.status-badge.active { background: #dcfce7; color: #166534; }
+.status-badge.inactive { background: #f1f5f9; color: #64748b; }
+
+/* Action Button (Report) */
+.alert-btn {
+    width: 32px; height: 32px;
+    border: none; background: #fee2e2;
+    color: #ef4444;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+}
+.alert-btn:hover { background: #ef4444; color: white; }
+
+.custom-body-padding {
+    padding: 20px !important;
+}
+/* --- NEW FRAUD (CHAKSHU) UI STYLES --- */
+
+/* --- NEW CHAKSHU GRID UI --- */
+
+/* 1. Scanner Hero Card */
+.chakshu-status-card {
+    background:#0f1724; /* Dark Navy */
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+/* The Glowing Eye Animation */
+.scanner-animation {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #4ade80; /* Bright Green */
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px solid #4ade80;
+    border-radius: 50%;
+    animation: pulseScan 2s infinite;
+}
+
+@keyframes pulseScan {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.status-text h3 { margin: 0; color: white; font-size: 1.1rem; }
+.live-tag { color: #4ade80; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+/* 2. The 2x2 Grid */
+.fraud-category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.fraud-tile {
+    background: white;
+    padding: 20px 10px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fraud-tile:hover {
+    transform: translateY(-5px);
+    border-color: #6366f1;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
+}
+
+.fraud-tile:active { transform: scale(0.95); }
+
+/* Tile Icons */
+.tile-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+}
+
+.icon-call { background: #eff6ff; color: #3b82f6; } /* Blue */
+.icon-sms { background: #fff7ed; color: #f97316; } /* Orange */
+.icon-whatsapp { background: #f0fdf4; color: #22c55e; } /* Green */
+.icon-link { background: #f5f3ff; color: #8b5cf6; } /* Purple */
+
+.tile-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 3. Report Button */
+.report-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626); /* Red Warning Color */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+.report-btn:hover {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}

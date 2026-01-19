@@ -368,7 +368,7 @@ body {
 }
 
 .tafcop-icon {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg,#f39c12, #e67e22 );
 }
 
 .chakshu-icon {
@@ -376,7 +376,7 @@ body {
 }
 
 .kyi-icon {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
+    background: linear-gradient(135deg,#3498db, #2980b9);
 }
 
 .icon-label {

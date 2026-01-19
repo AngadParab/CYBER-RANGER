@@ -1169,3 +1169,306 @@ body {
 .report-btn:hover {
     box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
+/* --- KYI (KNOW YOUR WIRE) UI --- */
+
+/* --- NEW KYI (NETWORK) UI STYLES --- */
+
+/* 1. Hero Card */
+.kyi-hero-card {
+    background: linear-gradient(135deg, var(--primary), var(--dark));
+    border-radius: var(--radius);
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.status-icon-ring {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: rgba(39, 174, 96, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+    font-size: 1.4rem;
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.4);
+}
+
+.status-details { display: flex; flex-direction: column; }
+.status-label { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.status-value { color: white; margin: 0; font-size: 1.4rem; letter-spacing: 1px; font-family: 'Orbitron', sans-serif; }
+
+/* Background Animation */
+.connection-wave {
+    position: absolute;
+    right: -20px; bottom: -40px;
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(39,174,96,0.2) 0%, transparent 70%);
+    opacity: 0.6;
+}
+
+/* 2. Network Grid */
+.network-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.net-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.net-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.net-card.full-span {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
+}
+
+.net-icon {
+    width: 36px; height: 36px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    color: var(--secondary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+}
+
+.net-info { display: flex; flex-direction: column; flex: 1; }
+.net-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
+.net-data { font-size: 0.95rem; font-weight: 700; color: #0f1724; }
+
+.net-badge {
+    background: #dcfce7;
+    color: #166534;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* 3. Action Stack */
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.isp-btn {
+    background: linear-gradient(135deg, var(--secondary), #219150);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    text-decoration: none; /* Removes underline from link */
+}
+
+.isp-btn:hover {
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    transform: translateY(-2px);
+}
+/* Add to styles/sanchar.css */
+
+/* Container Size */
+.tower-scan-container {
+    width: 60px; height: 60px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Center Icon Style */
+.tower-icon-center {
+    width: 45px; height: 45px;
+    background: #10b981; 
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* The Ripple Animation */
+.tower-pulse {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 2px solid #10b981;
+    opacity: 0;
+    animation: radarWave 2s infinite linear;
+}
+
+.delay-1 { animation-delay: 0s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 1.2s; }
+
+@keyframes radarWave {
+    0% { width: 100%; height: 100%; opacity: 0.8; border-width: 2px; }
+    100% { width: 300%; height: 300%; opacity: 0; border-width: 0px; }
+}
+
+/* --- OFFICIAL DOWNLOAD SECTION --- */
+
+.official-download-section {
+    background: #ffffff;
+    padding: 60px 0;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Header with Icon */
+.official-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.icon-circle-bg {
+    width: 60px; height: 60px;
+    background: #e6fff3; /* Light indigo circle */
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #4338ca;
+    font-size: 1.8rem;
+}
+
+.official-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f1724;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Grid Layout */
+.official-content-grid {
+    display: flex;
+    align-items: center; /* Vertically center */
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Phone Image */
+.official-phone-img {
+    max-width: 280px; /* Adjust based on your image size */
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+
+/* Right Side Info */
+.official-info-container {
+    text-align: center;
+}
+
+.official-desc {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.stat-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+.stat-link:hover { text-decoration: underline; }
+
+/* QR Row */
+.qr-store-row {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.qr-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.qr-img {
+    width: 140px;
+    height: 140px;
+    border: 2px solid #0f1724; /* Black border like image */
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/* Black Store Badge */
+.store-badge-black {
+    background: #000;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    width: 100%;
+    max-width: 160px;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.store-badge-black:hover {
+    transform: translateY(-2px);
+    background: #333;
+}
+
+.store-badge-black i { font-size: 24px; }
+
+.badge-text {
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    line-height: 1.1;
+}
+.badge-text small { font-size: 0.6rem; text-transform: uppercase; }
+.badge-text span { font-size: 0.9rem; font-weight: 700; }
+
+.download-stat {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0f1724;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .official-content-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+    .qr-store-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+}

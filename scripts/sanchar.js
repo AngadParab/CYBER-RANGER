@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (label === 'CEIR') switchScreen('block');
                 else if (label === 'TAFCOP') switchScreen('connections');
                 else if (label === 'CHAKSHU') switchScreen('fraud');
-                else if (label === 'KYI') console.log("KYI Feature coming soon");
+                else if (label === 'KYI') switchScreen('kyi');
             }
         });
     });

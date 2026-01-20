@@ -28,19 +28,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         eventsGrid.innerHTML = eventList.map(event => {
+            // SAFE DATA MAPPING (Handles missing fields gracefully)
             const safeEvent = {
                 title: event.title || "Untitled",
-                type: event.type || "—",
+                posterUrl: event.posterUrl || null, // <--- NEW: Image URL
+                type: event.type || "Event",
                 status: (event.status || "upcoming").toLowerCase(),
                 date: event.date || "",
-                time: event.time || "",
+                time: event.time || "",             // <--- NEW: Time
                 location: event.location || "—",
-                venue: event.venue || "—",
-                capacity: event.capacity || "",
+                venue: event.venue || "—",          // <--- NEW: Venue
+                capacity: event.capacity || "Open",
                 summary: event.summary || "",
-                details: Array.isArray(event.details) ? event.details : [],
+                details: Array.isArray(event.details) ? event.details : ["General Session"],
                 contact: {
-                    organizer: event.contact?.organizer || "—",
+                    organizer: event.contact?.organizer || "Cyber Ranger Team",
                     phone: event.contact?.phone || "",
                     email: event.contact?.email || ""
                 }
@@ -48,32 +50,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
             return `
             <div class="card">
+                ${safeEvent.posterUrl 
+                  ? `<div class="card-image"><img src="${safeEvent.posterUrl}" alt="${escapeHtml(safeEvent.title)}" loading="lazy"></div>` 
+                  : ''
+                }
+
                 <div class="card-header">
                     <h3>${escapeHtml(safeEvent.title)}</h3>
-                    <div class="event-type">${safeEvent.type}</div>
+                    <div class="event-type">${escapeHtml(safeEvent.type)}</div>
                 </div>
+                
                 <div class="meta">
-                    <span class="event-date">${formatDate(safeEvent.date)}</span>
-                    <span class="event-time">${safeEvent.time}</span>
-                    <span class="event-location">${safeEvent.location}</span>
-                    <span class="event-capacity">${safeEvent.capacity}</span>
+                    <span class="event-date"><i class="far fa-calendar"></i> ${formatDate(safeEvent.date)}</span>
+                    <span class="event-time"><i class="far fa-clock"></i> ${safeEvent.time}</span>
+                    <span class="event-location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(safeEvent.location)}</span>
                     <span class="event-status status-${safeEvent.status}">${safeEvent.status}</span>
                 </div>
+                
                 <div class="summary">${escapeHtml(safeEvent.summary)}</div>
+                
                 <div class="event-details">
                     <strong>What You'll Learn:</strong>
                     <ul>
                         ${safeEvent.details.map(detail => `<li>${escapeHtml(detail)}</li>`).join('')}
                     </ul>
                 </div>
+                
+                <div class="event-contact">
+                    <strong>Venue:</strong> ${escapeHtml(safeEvent.venue)}
+                </div>
+
                 <div class="event-contact">
                     <strong>Contact:</strong>
                     <span>${escapeHtml(safeEvent.contact.organizer)}</span><br>
-                    <a href="tel:${safeEvent.contact.phone}">${safeEvent.contact.phone}</a> | 
-                    <a href="mailto:${safeEvent.contact.email}">${safeEvent.contact.email}</a>
-                </div>
-                <div class="event-contact">
-                    <strong>Venue:</strong> ${escapeHtml(safeEvent.venue)}
+                    ${safeEvent.contact.phone ? `<a href="tel:${safeEvent.contact.phone}"><i class="fas fa-phone"></i> ${safeEvent.contact.phone}</a>` : ''} 
+                    ${safeEvent.contact.email ? ` | <a href="mailto:${safeEvent.contact.email}"><i class="fas fa-envelope"></i> Email</a>` : ''}
                 </div>
             </div>
         `;
@@ -87,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatDate(dateString) {
         if (!dateString) return "TBD";
         const date = new Date(dateString);
-        if (Number.isNaN(date.getTime())) return dateString; // Return original if invalid
+        if (Number.isNaN(date.getTime())) return dateString; 
         return date.toLocaleDateString('en-US', { 
             month: 'short', 
             day: 'numeric', 
@@ -95,8 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Escape HTML function
+    // Escape HTML function (Prevents XSS)
     function escapeHtml(text) {
+        if (!text) return "";
         return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
@@ -105,15 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let filteredEvents = publicEvents;
         
         if (filter === 'upcoming') {
-            filteredEvents = publicEvents.filter(event => event.status === 'upcoming');
-        } else if (filter === 'panjim') {
-            filteredEvents = publicEvents.filter(event => (event.location || "").toLowerCase() === 'panjim');
-        } else if (filter === 'margao') {
-            filteredEvents = publicEvents.filter(event => (event.location || "").toLowerCase() === 'margao');
-        } else if (filter === 'vasco') {
-            filteredEvents = publicEvents.filter(event => (event.location || "").toLowerCase() === 'vasco');
-        } else if (filter === 'mapusa') {
-            filteredEvents = publicEvents.filter(event => (event.location || "").toLowerCase() === 'mapusa');
+            filteredEvents = publicEvents.filter(event => (event.status || "").toLowerCase() === 'upcoming');
+        } else if (['panjim', 'margao', 'vasco', 'mapusa'].includes(filter)) {
+            filteredEvents = publicEvents.filter(event => (event.location || "").toLowerCase().includes(filter));
         }
         
         renderEvents(filteredEvents);
@@ -125,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search events function
     function searchEvents(searchTerm) {
         if (!searchTerm.trim()) {
-            renderEvents();
+            renderEvents(publicEvents);
             return;
         }
         
@@ -140,9 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
         renderEvents(filteredEvents);
     }
 
+    // Real-time Database Subscription
     function subscribeToPublicEvents() {
-        // Order by createdAt descending to show newest events first
-        // If you prefer to order by event date, use: orderBy("date", "asc")
         const q = query(EVENTS_COLLECTION, orderBy("createdAt", "desc"));
         onSnapshot(
             q,
@@ -155,11 +160,10 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             (error) => {
                 console.error("Failed to subscribe to public events", error);
-                // Show error message to user if needed
                 if (eventsGrid) {
                     eventsGrid.innerHTML = `
-                        <div style="text-align: center; padding: 2rem; color: #e74c3c;">
-                            <p>Unable to load events. Please refresh the page.</p>
+                        <div style="text-align: center; padding: 2rem; color: #ff4444;">
+                            <p><i class="fas fa-exclamation-circle"></i> Unable to load events. Please refresh.</p>
                         </div>
                     `;
                 }
@@ -202,14 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    searchInput.addEventListener('input', (e) => {
-        searchEvents(e.target.value);
-    });
+    if(searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchEvents(e.target.value);
+        });
+    }
 
     // Initialize
     subscribeToPublicEvents();
-    
-    // Initialize map
     initializeMap();
 });
 
@@ -218,51 +222,33 @@ let map;
 let markers = [];
 
 function initializeMap() {
-    // Check if Leaflet is loaded
     if (typeof L === 'undefined') {
         console.warn('Leaflet library not loaded');
         return;
     }
     
-    map = L.map('map').setView([15.4909, 73.8278], 12); // Panjim coordinates
+    // Check if map container exists
+    if (!document.getElementById('map')) return;
+
+    map = L.map('map').setView([15.4909, 73.8278], 11); // Centered on Goa
     
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
     }).addTo(map);
     
-    // Add markers for different event locations with custom icons
+    // Add markers for different event locations
     const eventLocations = [
-        { 
-            coords: [15.4909, 73.8278], 
-            title: 'Panjim Events', 
-            popup: 'Cyber Awareness Events - Panjim',
-            filter: 'panjim'
-        },
-        { 
-            coords: [15.2736, 73.9589], 
-            title: 'Margao Events', 
-            popup: 'Cyber Awareness Events - Margao',
-            filter: 'margao'
-        },
-        { 
-            coords: [15.3866, 73.8154], 
-            title: 'Vasco Events', 
-            popup: 'Cyber Awareness Events - Vasco',
-            filter: 'vasco'
-        },
-        { 
-            coords: [15.6029, 73.8114], 
-            title: 'Mapusa Events', 
-            popup: 'Cyber Awareness Events - Mapusa',
-            filter: 'mapusa'
-        }
+        { coords: [15.4909, 73.8278], title: 'Panjim Events', popup: '<b>Panjim</b><br>Cyber Hub', filter: 'panjim' },
+        { coords: [15.2736, 73.9589], title: 'Margao Events', popup: '<b>Margao</b><br>South District Center', filter: 'margao' },
+        { coords: [15.3866, 73.8154], title: 'Vasco Events', popup: '<b>Vasco</b><br>Port Town Center', filter: 'vasco' },
+        { coords: [15.6029, 73.8114], title: 'Mapusa Events', popup: '<b>Mapusa</b><br>North District Hub', filter: 'mapusa' }
     ];
     
-    // Create custom marker icon
+    // Custom Cyber Marker
     const cyberIcon = L.divIcon({
         className: 'cyber-marker',
-        html: '<div style="background: linear-gradient(135deg, #00ff88, #00ccff); width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ffffff; box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);"></div>',
+        html: '<div style="background: linear-gradient(135deg, #00ff88, #00ccff); width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px #00ff88;"></div>',
         iconSize: [20, 20],
         iconAnchor: [10, 10]
     });
@@ -270,16 +256,13 @@ function initializeMap() {
     eventLocations.forEach(location => {
         const marker = L.marker(location.coords, { icon: cyberIcon })
             .addTo(map)
-            .bindPopup(location.popup)
-            .openTooltip();
+            .bindPopup(location.popup);
         
-        // Store marker with filter info for highlighting
         marker.filter = location.filter;
         markers.push(marker);
     });
 }
 
-// Function to center map on specific location
 function centerMapOnLocation(filter) {
     if (!map) return;
     
@@ -288,21 +271,9 @@ function centerMapOnLocation(filter) {
         'margao': [15.2736, 73.9589],
         'vasco': [15.3866, 73.8154],
         'mapusa': [15.6029, 73.8114],
-        'all': [15.4909, 73.8278] // Default to Panjim for 'all'
+        'all': [15.4909, 73.8278]
     };
     
-    const coords = locations[filter];
-    if (coords) {
-        map.setView(coords, 13);
-        
-        // Highlight the relevant marker
-        markers.forEach(marker => {
-            if (filter === 'all' || marker.filter === filter) {
-                marker.setOpacity(1);
-                marker.bringToFront();
-            } else {
-                marker.setOpacity(0.5);
-            }
-        });
-    }
+    const coords = locations[filter] || locations['all'];
+    map.setView(coords, filter === 'all' ? 11 : 13);
 }

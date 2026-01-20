@@ -5,11 +5,12 @@
  * - Provides logout handler
  */
 
-import { auth, db } from "./firebase-config.js";
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { auth, db, storage } from "./firebase-config.js"; // Added storage
+import { 
+    ref, 
+    uploadBytes, 
+    getDownloadURL 
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-storage.js"; // New Storage Imports
 import {
   collection,
   addDoc,
@@ -193,70 +194,63 @@ async function handleEventSubmit(event) {
   
   if (!form) return;
 
-  // Get form data
-  const formData = new FormData(form);
-  const title = formData.get("title")?.toString().trim();
-  const date = formData.get("date")?.toString();
-  const location = formData.get("location")?.toString().trim() || "—";
-  const status = formData.get("status")?.toString() || "Upcoming";
-
-  // Validation
-  const errors = [];
-  
-  // Check if title is empty
-  if (!title) {
-    errors.push("Event title is required");
-  }
-  
-  // Check if date is empty
-  if (!date) {
-    errors.push("Event date is required");
-  } else {
-    // Validate date format
-    const dateObj = new Date(date);
-    if (Number.isNaN(dateObj.getTime())) {
-      errors.push("Please provide a valid date");
-    }
-  }
-
-  // Show validation errors if any
-  if (errors.length > 0) {
-    alert(`Please fix the following issues:\n• ${errors.join("\n• ")}`);
-    return;
-  }
-
-  // Set loading state
+  // 1. Show Loading State
   const originalButtonText = submitButton?.innerHTML || "";
   if (submitButton) {
     submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+    submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
   }
 
-  // Prepare event data
-  const newEvent = {
-    title: title,
-    date: date,
-    location: location,
-    status: status,
-    createdAt: new Date().toISOString()
-  };
-
   try {
-    // Submit to Firestore
+    const formData = new FormData(form);
+    
+    // 2. Handle Image Upload
+    let posterUrl = ""; // Default empty if no image
+    const fileInput = document.getElementById('event-poster');
+    const file = fileInput?.files[0];
+
+    if (file) {
+        // Create unique path: events/timestamp_filename
+        const storageRef = ref(storage, `events/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        posterUrl = await getDownloadURL(snapshot.ref);
+    }
+
+    // 3. Process Details (Split text area by new lines)
+    const rawDetails = formData.get("details")?.toString() || "";
+    const detailsArray = rawDetails.split('\n').filter(line => line.trim() !== "");
+
+    // 4. Create Full Event Object
+    const newEvent = {
+      title: formData.get("title")?.toString().trim(),
+      date: formData.get("date"),
+      time: formData.get("time"),
+      type: formData.get("type"),
+      location: formData.get("location"),
+      venue: formData.get("venue"),
+      summary: formData.get("summary"),
+      details: detailsArray.length ? detailsArray : ["Cyber Safety Basics"],
+      status: formData.get("status"),
+      posterUrl: posterUrl, // Save the image URL
+      contact: {
+          organizer: formData.get("organizer") || "Cyber Ranger Team",
+          phone: formData.get("phone") || "",
+          email: state.profile.email
+      },
+      createdAt: new Date().toISOString()
+    };
+
+    // 5. Save to Firestore
     await addDoc(EVENTS_COLLECTION, newEvent);
     
-    // Success: reset form and close modal
     form.reset();
     toggleModal(false);
-    
-    // Show success feedback (optional)
-    console.log("Event added successfully");
+    alert("Event Published Successfully!");
     
   } catch (error) {
     console.error("Failed to add event", error);
-    alert("Failed to add event. Please check your connection and try again.");
+    alert("Error: " + error.message);
   } finally {
-    // Restore button state
     if (submitButton) {
       submitButton.disabled = false;
       submitButton.innerHTML = originalButtonText;

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../styles/myths.css">
 </head>
 <body class="myths-page">
-    <!-- Navigation -->
+
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -38,301 +38,423 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="myths-hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1><i class="fas fa-myth-buster"></i> Cyber Myths Busted</h1>
-                <p>Separating fact from fiction in cybersecurity. Don't let these common myths put you at risk!</p>
+    <section class="myths-hero-split">
+        <div class="container hero-container">
+            <div class="hero-text">
+                
+                <h1>Cyber Myths <span class="highlight-text">Busted</span></h1>
+                <p>Don't let misinformation compromise your security. We separate fact from fiction to keep you safe in the digital world.</p>
+                <a href="#myth-list" class="cta-button">Start Debunking <i class="fas fa-arrow-down"></i></a>
             </div>
-        </div>
-    </section>
-
-    <!-- Myths Section -->
-    <section class="myths-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Common Cyber Security Myths</h2>
-                <p>Let's debunk these dangerous misconceptions</p>
-            </div>
-
-            <div class="myths-grid">
-                <!-- Myth 1 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "I'm too small to be targeted"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Small businesses and individuals are actually prime targets because they often have weaker security measures.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Cybercriminals use automated tools to scan for vulnerabilities. Size doesn't matter - weak security does. Everyone is a potential target.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 2 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Antivirus software is enough"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Antivirus alone will protect me from all cyber threats.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Antivirus is just one layer. You need firewalls, regular updates, strong passwords, and user awareness for complete protection.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 3 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Strong passwords are hard to remember"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>I need to use simple passwords I can remember easily.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Use passphrases (like "MyDogLoves3Treats!") or password managers. They're easier to remember and much more secure.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 4 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Macs can't get viruses"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Mac computers are immune to malware and viruses.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Macs can get malware too! While less common, Mac-specific threats exist and are growing. Always use security software.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 5 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Public Wi-Fi is safe with HTTPS"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>HTTPS websites are completely safe on public Wi-Fi.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>HTTPS helps but doesn't protect against all threats. Use VPNs on public Wi-Fi and avoid sensitive transactions.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 6 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "I'll know if I'm hacked"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Cyber attacks are obvious and I'll immediately notice if I'm compromised.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Many attacks are silent and undetected for months. Monitor your accounts regularly and watch for unusual activity.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 7 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Incognito mode makes me anonymous"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Private/incognito browsing makes me completely anonymous online.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Incognito only prevents local history storage. Your ISP, websites, and network admins can still track you. Use VPNs for real privacy.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 8 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "I don't have anything valuable to steal"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>I don't have money or important data, so hackers won't target me.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Your personal data, computing power, and network access are valuable. Hackers use compromised devices for botnets, crypto mining, and identity theft.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 9 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Two-factor authentication is too complicated"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>2FA is too difficult to set up and use regularly.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Modern 2FA is simple - just approve notifications on your phone. It takes seconds and provides massive security benefits.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 10 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "I can spot phishing emails easily"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Phishing emails are obvious with poor grammar and spelling mistakes.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Modern phishing is sophisticated with perfect grammar, legitimate-looking domains, and personalized content. Always verify before clicking.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 11 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "Mobile devices are safer than computers"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>Smartphones and tablets are immune to malware and hacking.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Mobile devices face unique threats like malicious apps, SMS phishing, and unsecured Wi-Fi. Keep them updated and use security apps.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Myth 12 -->
-                <div class="myth-card">
-                    <div class="myth-header">
-                        <div class="myth-icon myth-icon-false">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <h3>Myth: "I can trust apps from official app stores"</h3>
-                    </div>
-                    <div class="myth-content">
-                        <div class="myth-false">
-                            <h4><i class="fas fa-times-circle"></i> FALSE</h4>
-                            <p>All apps in official stores are safe and legitimate.</p>
-                        </div>
-                        <div class="myth-truth">
-                            <h4><i class="fas fa-check-circle"></i> TRUTH</h4>
-                            <p>Malicious apps sometimes slip through store reviews. Check app permissions, reviews, and developer reputation before installing.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Prevention Tips -->
-    <section class="prevention-tips">
-        <div class="container">
-            <div class="section-header">
-                <h2>Stay Protected</h2>
-                <p>Follow these essential cybersecurity practices</p>
-            </div>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Use Multi-Factor Authentication</h3>
-                    <p>Add an extra layer of security to your accounts</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-sync-alt"></i>
-                    <h3>Keep Software Updated</h3>
-                    <p>Regular updates patch security vulnerabilities</p>
-                </div>
-                <div class="tip-card">
+            <div class="hero-visual">
+                <div class="myth-floating-card card-1">
                     <i class="fas fa-user-secret"></i>
-                    <h3>Be Skeptical</h3>
-                    <p>Question suspicious emails, links, and requests</p>
+                    <span>Hackers only target rich people?</span>
+                    <div class="stamp">BUSTED</div>
                 </div>
-                <div class="tip-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Backup Regularly</h3>
-                    <p>Protect your data with regular backups</p>
+                <div class="myth-floating-card card-2">
+                    <i class="fab fa-apple"></i>
+                    <span>Macs don't get viruses?</span>
+                    <div class="stamp">BUSTED</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section id="myth-list" class="myths-interactive">
+        <div class="container">
+            <div class="section-header-left">
+                <h2>The Reality Check</h2>
+                <p>Click on a myth to reveal the truth behind it.</p>
+            </div>
+
+            <div class="accordion-container">
+                
+                <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fas fa-bug"></i>
+                            <h3>"I'm too small to be targeted"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>Small businesses and individuals think they are safe because they have nothing "worth stealing."</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>Automated bots scan the internet for <strong>any</strong> vulnerability. Your device can be used for botnets, crypto mining, or as a gateway to larger attacks. Everyone is a target.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fas fa-shield-virus"></i>
+                            <h3>"Antivirus software is enough"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>Installing one antivirus program protects me from 100% of threats.</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>Antivirus is just a goalkeeper. You still need defenders: <strong>Firewalls, Updates, Strong Passwords, and awareness</strong>. Defense in depth is the only real protection.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fas fa-key"></i>
+                            <h3>"Strong passwords are hard to remember"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>Secure passwords must be random gibberish like 'Xj9#m$2p'.</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>Use <strong>Passphrases</strong>! A sentence like "MyBlueGuitarPlaysLoud!" is secure and easy to recall. Better yet, use a Password Manager and remember just one master password.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fab fa-apple"></i>
+                            <h3>"Macs don't get viruses"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>Apple computers are immune to all malware by design.</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>While less targeted than Windows historically, Macs <strong>can and do</strong> get malware. As their popularity grows, so do Mac-specific threats. Security software is essential for macOS too.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fas fa-wifi"></i>
+                            <h3>"Public Wi-Fi is safe with HTTPS"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>If a website has a green lock (HTTPS), nobody on the coffee shop Wi-Fi can see my data.</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>HTTPS encrypts the content, but sophisticated attacks can strip this encryption or trick you. Public Wi-Fi is inherently risky. Use a <strong>VPN</strong> for true privacy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-accordion-item">
+                    <div class="accordion-header">
+                        <div class="myth-title">
+                            <i class="fas fa-user-secret"></i>
+                            <h3>"Incognito mode makes me anonymous"</h3>
+                        </div>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="reality-box">
+                            <div class="reality-false">
+                                <h4><i class="fas fa-times"></i> The Myth</h4>
+                                <p>Private/Incognito browsing hides my activity from everyone.</p>
+                            </div>
+                            <div class="reality-truth">
+                                <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                                <p>Incognito only stops your browser from saving history. Your ISP, employer, and the websites you visit can still track everything you do.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>"Software updates are just for new features"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>I can skip updates because they just change the look or add features I don't need.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Most updates include critical <strong>security patches</strong> for vulnerabilities that hackers are already exploiting. Delaying updates leaves your door wide open.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>"My smart fridge/TV doesn't need security"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>Hackers don't care about my smart bulbs or thermostat, so I don't need to secure them.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>IoT devices are often the <strong>weakest link</strong>. Hackers use them as a "backdoor" to enter your home network and access your computer or bank details.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-cloud"></i>
+                        <h3>"Everything in the cloud is automatically safe"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>If I save my files to Google Drive or iCloud, they are 100% secure from everyone.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Cloud providers secure the <em>infrastructure</em>, but <strong>you</strong> are responsible for your password and access settings. If your account is hacked, your cloud data is gone too.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <h3>"Email attachments from friends are safe"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>If I know the sender, I can safely open any link or file they send me.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Attackers often hijack real accounts to spread malware. If a friend sends a weird link or unexpected file, <strong>verify it</strong> with them through another channel (call/text) first.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-user-ninja"></i>
+                        <h3>"Only geniuses can be hackers"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>Hackers are super-coders in hoodies typing green code in a dark room.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Most cybercriminals use <strong>automated tools</strong> bought on the dark web. They don't need to be geniuses; they just need you to make one simple mistake.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-eye-slash"></i>
+                        <h3>"I'll know immediately if I've been hacked"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>If my computer is hacked, it will crash, show a skull on the screen, or act weird instantly.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Modern malware is designed to be <strong>silent</strong>. Hackers want to stay hidden to steal data or use your bandwidth for months without you noticing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>"Mobile phones are safer than computers"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>I don't need to worry about security on my phone, it's not a real computer.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Phones are just pocket computers with cameras and GPS. They face unique threats like malicious apps, SMS phishing (Smishing), and unsecured Wi-Fi risks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-fish"></i>
+                        <h3>"I can easily spot a phishing email"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>Scam emails always have bad grammar, typos, and come from weird addresses.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>AI tools now write perfect scam emails. Hackers also spoof legitimate logos and use "typosquatting" domains (like `g0ogle.com`) that look 99% real at a glance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-lock"></i>
+                        <h3>"Two-Factor Authentication is too hard"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>It takes too long to type in a code every single time I log in.</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Most apps only ask for 2FA on <strong>new devices</strong>. It adds seconds to your login but stops 99.9% of account hacks. It is the single best security step you can take.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="myth-accordion-item">
+                <div class="accordion-header">
+                    <div class="myth-title">
+                        <i class="fas fa-wallet"></i>
+                        <h3>"I have nothing worth stealing"</h3>
+                    </div>
+                    <i class="fas fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="reality-box">
+                        <div class="reality-false">
+                            <h4><i class="fas fa-times"></i> The Myth</h4>
+                            <p>I'm not rich and I don't have government secrets, so why would anyone hack me?</p>
+                        </div>
+                        <div class="reality-truth">
+                            <h4><i class="fas fa-check-double"></i> The Reality</h4>
+                            <p>Your <strong>digital identity</strong> is valuable. Hackers can open credit cards in your name, use your email to scam your friends, or hold your family photos ransom.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="prevention-modern">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Security Toolkit</h2>
+                <p>Essential habits to stay cyber-secure</p>
+            </div>
+            
+            <div class="toolkit-grid">
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>MFA Everywhere</h3>
+                    <p>Enable Multi-Factor Authentication on every account that offers it.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-sync"></i></div>
+                    <h3>Auto-Updates</h3>
+                    <p>Set your OS and apps to update automatically. Patch those holes!</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Verify Senders</h3>
+                    <p>Check the actual email address, not just the display name.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>3-2-1 Backup</h3>
+                    <p>3 copies of data, 2 different media types, 1 stored offsite (cloud).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -364,7 +486,6 @@
         </div>
     </footer>
 
-    <!-- Chatbot -->
     <div id="chatbot-container">
         <div id="chatbot-toggle" class="chatbot-toggle">
             <i class="fas fa-robot"></i>
@@ -424,5 +545,28 @@
     <script type="module" src="../scripts/firebase-config.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/chatbot.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headers = document.querySelectorAll('.accordion-header');
+            
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items (optional - remove if you want multiple open)
+                    document.querySelectorAll('.myth-accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

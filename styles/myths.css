@@ -1,252 +1,339 @@
-/* Cyber Myths Page Styles - Modern Design */
+/* Cyber Myths Page Styles - Cyber Ranger Unified Theme */
 :root {
-    --bg: #e6fff3; /* Using light from main.css */
+    /* Theme Variables (Matches sanchar.css & main.css) */
+    --bg: #e6fff3;        /* Light Greenish White */
     --card: #ffffff;
-    --accent: #06b6d4;
-    --muted: #94a3b8;
-    --glass: rgba(255,255,255,0.03);
+    --primary: #000000;   /* Black */
+    --secondary: #27ae60; /* Cyber Green */
+    --accent: #e74c3c;    /* Alert Red */
+    --dark: #0d3d0d;      /* Dark Green */
+    --muted: #64748b;
+    
+    /* Component Specific */
     --radius: 14px;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    /* Fonts */
+    font-family: 'Rajdhani', system-ui, -apple-system, sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-body {
+body.myths-page {
     margin: 0;
     background: var(--bg);
-    color: #0f1724;
-    min-height: 100vh;
+    color: var(--primary);
+    line-height: 1.6;
 }
 
-/* Page-specific body class */
-.myths-page {
-    background-color: var(--bg);
+/* --- 1. Split Hero Section --- */
+.myths-hero-split {
+    /* Dark Theme Gradient (Black to Dark Green) */
+    background: linear-gradient(135deg, var(--primary), var(--dark));
+    padding: 100px 0 80px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid var(--secondary);
 }
 
-/* Myths Hero Section */
-.myths-hero {
-    background: linear-gradient(135deg, #000000, var(--dark));
-    color: #e6eef6;
-    padding: 80px 0;
-    text-align: center;
-}
-
-.myths-hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #e6eef6;
-}
-
-.myths-hero p {
-    font-size: 1.2rem;
-    color: rgba(230, 238, 246, 0.8);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Myths Section */
-.myths-section {
-    padding: 24px;
-}
-
-.myths-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 18px;
-    margin-top: 0;
-}
-
-.myth-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius: var(--radius);
-    padding: 18px;
-    border: 1px solid rgba(255,255,255,0.03);
-    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-    transition: all 0.3s ease;
-}
-
-.myth-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(2,6,23,0.8);
-}
-
-.myth-header {
+.hero-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-badge {
+    background: rgba(39, 174, 96, 0.15); /* Green Tint */
+    color: var(--secondary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--secondary);
+    display: inline-block;
     margin-bottom: 15px;
 }
 
-.myth-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.hero-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    margin: 10px 0 20px 0;
+    line-height: 1.1;
+    color: white;
+}
+
+.highlight-text {
+    color: var(--accent); /* Red for "Busted" */
+    display: inline-block;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    color: #cbd5e1; /* Lighter text for dark bg */
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--secondary), #219150); /* Green Button */
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+/* Hero Visual (Floating Cards) */
+.hero-visual {
+    flex: 1;
+    position: relative;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    color: #021024;
 }
 
-.myth-icon-false {
-    background: linear-gradient(135deg, var(--accent), #3b82f6);
+.myth-floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.05); /* Glass effect */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(39, 174, 96, 0.3); /* subtle green border */
+    padding: 20px;
+    border-radius: 12px;
+    width: 260px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
 }
 
-.myth-header h3 {
-    color: #0f1724;
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
+.myth-floating-card i { font-size: 2rem; color: var(--secondary); margin-bottom: 5px; }
+.myth-floating-card span { font-weight: 600; font-size: 1.1rem; color: white; }
+
+.stamp {
+    border: 3px solid var(--accent); /* Red Border */
+    color: var(--accent);
+    font-weight: 800;
+    padding: 2px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transform: rotate(-10deg);
+    font-size: 1rem;
+    margin-top: 5px;
+    letter-spacing: 2px;
+    background: rgba(231, 76, 60, 0.1);
 }
 
-.myth-content {
+.card-1 { top: 20px; right: 20px; transform: rotate(5deg); animation: float 6s ease-in-out infinite; }
+.card-2 { bottom: 40px; left: 20px; transform: rotate(-3deg); animation: float 6s ease-in-out infinite 1s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+/* --- 2. Interactive Accordion Section --- */
+.myths-interactive {
+    padding: 80px 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header-left {
+    text-align: left;
+    margin-bottom: 40px;
+    border-left: 5px solid var(--secondary); /* Green accent line */
+    padding-left: 20px;
+}
+
+.section-header-left h2 { font-size: 2.2rem; color: var(--primary); margin: 0; font-family: 'Orbitron', sans-serif;}
+.section-header-left p { color: var(--muted); font-size: 1.1rem; margin: 5px 0 0; }
+
+.accordion-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.myth-false,
-.myth-truth {
+.myth-accordion-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.accordion-header {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    transition: background 0.2s;
+}
+
+.accordion-header:hover {
+    background: #f0fdf4; /* Very light green hover */
+}
+
+.myth-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.myth-title i {
+    color: var(--accent); /* Red icon for the "Myth" */
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+}
+
+.myth-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.arrow-icon {
+    color: var(--muted);
+    transition: transform 0.3s;
+}
+
+/* Accordion Active State */
+.myth-accordion-item.active {
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.15);
+    border-color: var(--secondary); /* Green border when active */
+}
+
+.myth-accordion-item.active .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--secondary);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+}
+
+.myth-accordion-item.active .accordion-body {
+    max-height: 500px; 
+}
+
+/* Inner Content of Accordion */
+.reality-box {
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: #fcfcfc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.reality-false, .reality-truth {
     padding: 15px;
-    border-radius: 10px;
-    border-left: 3px solid;
+    border-radius: 8px;
 }
 
-.myth-false {
-    background: rgba(6,182,212,0.05);
-    border-left-color: var(--accent);
+.reality-false {
+    background: rgba(231, 76, 60, 0.08); /* Light Red BG */
+    border-left: 3px solid var(--accent);
 }
 
-.myth-truth {
-    background: rgba(39, 174, 96, 0.05);
-    border-left-color: #27ae60;
+.reality-truth {
+    background: rgba(39, 174, 96, 0.08); /* Light Green BG */
+    border-left: 3px solid var(--secondary);
 }
 
-.myth-false h4,
-.myth-truth h4 {
-    margin: 0 0 8px 0;
-    font-size: 14px;
-    font-weight: 600;
+.reality-false h4, .reality-truth h4 {
+    margin: 0 0 10px 0;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.myth-false h4 {
-    color: var(--accent);
-}
+.reality-false h4 { color: var(--accent); }
+.reality-truth h4 { color: var(--secondary); }
 
-.myth-truth h4 {
-    color: #27ae60;
-}
+.reality-box p { margin: 0; font-size: 0.95rem; color: #334155; }
 
-.myth-false p,
-.myth-truth p {
-    margin: 0;
-    color: #0f1724;
-    line-height: 1.4;
-    font-size: 13px;
-}
-
-/* Prevention Tips Section */
-.prevention-tips {
+/* --- 3. Modern Prevention Section --- */
+.prevention-modern {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: #ffffff; /* White bg for contrast */
 }
 
-.tips-grid {
+.toolkit-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
 }
 
-.tip-card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
+.tool-card {
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    padding: 30px 20px;
+    border-radius: 16px;
+    background: var(--bg); /* Light Greenish White */
+    border: 1px solid transparent;
+    transition: transform 0.3s;
 }
 
-.tip-card:hover {
+.tool-card:hover {
     transform: translateY(-5px);
+    border-color: var(--secondary);
+    background: white;
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.15);
 }
 
-.tip-card i {
-    font-size: 3rem;
-    color: #27ae60;
-    margin-bottom: 20px;
+.tool-icon {
+    width: 60px; height: 60px;
+    margin: 0 auto 20px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--secondary);
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(39, 174, 96, 0.1);
 }
 
-.tip-card h3 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
+.tool-card h3 { margin: 0 0 10px 0; color: var(--primary); font-weight: 700; }
+.tool-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
 
-.tip-card p {
-    color: #666;
-    margin: 0;
-    line-height: 1.5;
-}
-
-/* Responsive Design */
+/* Responsive Tweaks */
 @media (max-width: 768px) {
-    .myths-hero h1 {
-        font-size: 2.5rem;
-    }
+    .hero-container { flex-direction: column; text-align: center; }
+    .hero-text { margin-bottom: 40px; }
+    .hero-visual { display: none; }
     
-    .myths-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .myth-card {
-        padding: 20px;
-    }
-    
-    .myth-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .myth-header h3 {
-        font-size: 1.1rem;
-    }
-    
-    .tips-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+    .reality-box { grid-template-columns: 1fr; }
+    .section-header-left { text-align: center; border-left: none; padding-left: 0; }
+    .hero-text h1 { font-size: 2.5rem; }
 }
-
-@media (max-width: 480px) {
-    .myths-hero {
-        padding: 60px 0;
-    }
-    
-    .myths-hero h1 {
-        font-size: 2rem;
-    }
-    
-    .myths-section,
-    .prevention-tips {
-        padding: 60px 0;
-    }
-    
-    .myth-card {
-        padding: 15px;
-    }
-    
-    .tip-card {
-        padding: 20px;
-    }
-}
-
-
-

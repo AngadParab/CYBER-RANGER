@@ -5,12 +5,20 @@
  * - Provides logout handler
  */
 
-import { auth, db, storage } from "./firebase-config.js"; // Added storage
+import { auth, db, storage } from "./firebase-config.js";
+
+// 1. THIS WAS MISSING - Restore it!
+import { 
+  onAuthStateChanged, 
+  signOut 
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
 import { 
     ref, 
     uploadBytes, 
     getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-storage.js"; // New Storage Imports
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-storage.js";
+
 import {
   collection,
   addDoc,
@@ -18,7 +26,6 @@ import {
   query,
   orderBy
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
 const LOGIN_PATH = "/login.html";
 const EVENTS_COLLECTION = collection(db, "public_events");
 

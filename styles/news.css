@@ -1,165 +1,190 @@
-/* News Page Specific Styles - Modern Design */
+/* styles/news.css - Modern Cyber Bulletin Design */
+
 :root {
-    --bg: #e6fff3; /* Using light from main.css */
-    --card: #ffffff;
-    --accent: #06b6d4;
-    --muted: #94a3b8;
-    --glass: rgba(255,255,255,0.03);
-    --radius: 14px;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    /* PRESERVING YOUR ORIGINAL THEME COLORS */
+    --bg: #0a0a0a;          /* Dark background */
+    --card: #1a1a1a;        /* Card background */
+    --accent: #00ff88;      /* Cyber Green */
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-glow: rgba(0, 255, 136, 0.2);
+    
+    /* NEW DESIGN VARIABLES */
+    --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: #0f1724;
-    min-height: 100vh;
-}
-
-.news-page {
+body.news-page {
     background-color: var(--bg);
+    color: var(--text-primary);
+    margin: 0;
 }
 
+/* --- HERO SECTION --- */
 .news-hero {
-    background: linear-gradient(135deg, #000000, var(--dark));
-    color: #e6eef6;
-    padding: 80px 0;
+    background: linear-gradient(180deg, #000000 0%, #111 100%);
+    padding: 80px 0 60px;
     text-align: center;
+    border-bottom: 1px solid var(--border-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle grid background pattern */
+.news-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
 }
 
 .news-hero h1 {
+    font-family: 'Orbitron', sans-serif;
     font-size: 3rem;
-    margin-bottom: 20px;
-    color: #e6eef6;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
 }
 
 .news-hero p {
-    font-size: 1.2rem;
-    color: rgba(230, 238, 246, 0.8);
-    max-width: 800px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
     margin: 0 auto;
 }
 
+/* --- DASHBOARD HEADER --- */
 .news-section {
-    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
 .news-header {
-    padding: 28px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: var(--radius);
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 0;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
 }
 
-.logo-section {
+.header-title {
     display: flex;
+    align-items: center;
     gap: 12px;
-    align-items: center;
 }
 
-.cyber-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, var(--accent), #3b82f6);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #021024;
+.header-title h2 {
+    margin: 0;
+    font-family: 'Rajdhani', sans-serif;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
-.logo-section h2 {
-    margin: 0;
-    font-size: 20px;
-    color: #0f1724;
+/* Pulsing "Live" Dot */
+.live-indicator {
+    height: 10px;
+    width: 10px;
+    background-color: #ff4444;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+    animation: pulse-red 2s infinite;
 }
 
-.logo-section .lead {
-    margin: 0;
-    color: var(--muted);
-    font-size: 13px;
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
 }
 
+/* Filter Buttons */
 .controls {
-    margin-left: auto;
     display: flex;
-    gap: 8px;
-    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .controls .btn {
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.04);
-    padding: 8px 12px;
-    border-radius: 10px;
-    color: var(--muted);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
-.controls .btn.active {
-    background: linear-gradient(90deg, var(--accent), #3b82f6);
-    color: #021024;
-    border: none;
+.controls .btn:hover, .controls .btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--border-glow);
+    font-weight: 600;
 }
 
-.controls .btn:hover {
-    background: linear-gradient(90deg, var(--accent), #3b82f6);
-    color: #021024;
-    border: none;
-}
-
-.news-main {
-    padding: 24px;
-}
-
-.filters {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 18px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 6px 8px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.02);
-    font-size: 12px;
-    color: var(--muted);
-}
-
+/* --- BENTO GRID LAYOUT --- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 24px;
+    gap: 30px;
+    grid-auto-flow: dense; /* Keeps grid packed tight */
 }
 
+/* --- CARD DESIGN --- */
 .card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.03);
-    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
-    transition: all 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease;
+    /* The "Cyber Ranger" Tech Border on the left */
+    border-left: 4px solid var(--accent);
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(2,6,23,0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* FEATURED CARD (First item spans 2 columns) */
+@media (min-width: 900px) {
+    .card.featured {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr; /* Image on left, Text on right */
+        border-left: 4px solid #ffaa00; /* Gold border for top news */
+    }
+    
+    .card.featured .card-image {
+        height: 100%; /* Full height */
+    }
+    
+    .card.featured h3 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Card Image */
 .card-image {
-    position: relative;
-    width: 100%;
     height: 200px;
+    width: 100%;
+    position: relative;
     overflow: hidden;
 }
 
@@ -167,162 +192,167 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.6s ease;
 }
 
 .card:hover .card-image img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
+/* Type Badge (e.g. SCAM ALERT) */
 .card-type-overlay {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    left: 10px;
     background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    border: 1px solid var(--accent);
+    backdrop-filter: blur(4px);
 }
 
+/* Card Content */
 .card-content {
-    padding: 18px;
-    flex: 1;
+    padding: 24px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
-.card-header {
+/* Metadata (Date & Location) */
+.meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.card-header h3 {
-    margin: 0 0 6px;
-    font-size: 16px;
-    color: #0f1724;
+.meta i {
+    color: var(--accent);
+}
+
+.card h3 {
+    margin: 0 0 12px 0;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
     line-height: 1.3;
 }
 
-.meta {
-    font-size: 12px;
-    color: var(--muted);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 0;
-}
-
 .summary {
-    margin: 12px 0;
-    color: #0f1724;
-    font-size: 14px;
-    line-height: 1.35;
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Pushes bottom elements down */
 }
 
-.tips {
-    background: rgba(6,182,212,0.05);
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px dashed rgba(6,182,212,0.08);
-    margin-top: 15px;
-}
-
-.tips strong {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.tips ul {
-    margin: 8px 0 0 18px;
-    padding: 0;
-    color: #0f1724;
-}
-
-.tips li {
-    margin-bottom: 5px;
-    line-height: 1.4;
-    font-size: 13px;
-}
-
-.tips li:last-child {
-    margin-bottom: 0;
-}
-
-.reference {
-    margin-top: 15px;
-    padding: 10px;
-    background: rgba(6,182,212,0.05);
+/* --- ACCORDION (How to Protect) --- */
+details.tips-toggle {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    border-left: 3px solid var(--accent);
-    font-size: 13px;
+    margin-top: auto;
+    transition: all 0.3s ease;
 }
 
-.reference strong {
-    color: var(--accent);
-    margin-right: 8px;
+details.tips-toggle[open] {
+    background: rgba(0, 255, 136, 0.05); /* Green tint when open */
+    border-color: var(--border-glow);
 }
 
-.reference a {
+summary {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
     color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Chevron Icon */
+summary::after {
+    content: '\f078'; /* FontAwesome Down Arrow */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-left: auto;
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+}
+
+details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.tips-content {
+    padding: 0 15px 15px 15px;
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.tips-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.tips-content li {
+    margin-bottom: 6px;
+}
+
+/* --- FOOTER ACTIONS --- */
+.card-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.read-more {
+    color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
 }
 
-.reference a:hover {
-    color: #3b82f6;
-    text-decoration: underline;
+.read-more:hover {
+    color: var(--accent);
 }
 
-/* Responsive Design */
+/* Mobile Tweaks */
 @media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .card.featured {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        grid-column: span 1;
     }
     
-    .card-image {
-        height: 180px;
-    }
-}
-
-@media (max-width: 520px) {
     .news-header {
-        padding: 18px;
-    }
-    
-    .cyber-icon {
-        width: 52px;
-        height: 52px;
-    }
-    
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    
-    .card-image {
-        height: 160px;
-    }
-    
-    .card-content {
-        padding: 16px;
-    }
-    
-    .card-header {
         flex-direction: column;
-        gap: 10px;
+        align-items: flex-start;
     }
     
-    .controls {
-        margin-left: 0;
-        margin-top: 15px;
-        width: 100%;
-        justify-content: center;
+    .news-hero h1 {
+        font-size: 2rem;
     }
 }

@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="../styles/news.css">
 </head>
 <body class="news-page">
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                 <a href="../index.html" class="brand-title" style="color: white; ">CYBER RANGER</a>
+                 <a href="../index.html" class="brand-title" style="color: white;">CYBER RANGER</a>
             </div>
             <div class="nav-links">
                 <a href="../index.html">Home</a>
@@ -38,30 +37,35 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="news-hero">
         <div class="container">
             <div class="hero-content">
                 <h1><i class="fas fa-newspaper"></i> Cyber Attack News</h1>
-                <p>Stay informed about recent cyber incidents in Goa & India. Each incident includes prevention tips to help you stay protected.</p>
+                <p>Real-time threat intelligence for Goa & India. Stay ahead of the latest scams and vulnerabilities.</p>
             </div>
         </div>
     </section>
 
-    <!-- News Section -->
     <section class="news-section">
-        <header class="news-header">
-        </header>
+        <div class="news-header">
+            <div class="header-title">
+                <div class="live-indicator"></div>
+                <h2 style="margin:0; color: #1e293b; font-family: 'Orbitron', sans-serif;">Latest Threats Feed</h2>
+            </div>
+            <div class="controls">
+                <button class="btn active" data-filter="all">All Updates</button>
+                <button class="btn" data-filter="goa">Goa Alerts</button>
+                <button class="btn" data-filter="india">National</button>
+                <button class="btn" id="shuffle" title="Shuffle News"><i class="fas fa-random"></i></button>
+            </div>
+        </div>
 
         <main class="news-main">
-           
             <section class="grid" id="newsGrid" aria-live="polite">
-                <!-- cards injected by JS -->
-            </section>
+                </section>
         </main>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -88,71 +92,13 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Cyber Ranger. All rights reserved. Information on this website may differ from original sources. All content is used for educational purposes only.</p>
+                <p>&copy; 2025 Cyber Ranger. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Chatbot -->
-    <div id="chatbot-container">
-        <div id="chatbot-toggle" class="chatbot-toggle">
-            <i class="fas fa-robot"></i>
-            <span class="chatbot-badge" id="chatbot-badge">1</span>
-        </div>
-        <div id="chatbot-window" class="chatbot-window">
-            <div class="chatbot-header">
-                <div class="chatbot-title">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Cyber Ranger Assistant</span>
-                </div>
-                <div class="chatbot-controls">
-                    <button id="chatbot-minimize" class="chatbot-btn">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button id="chatbot-close" class="chatbot-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="chatbot-body">
-                <div class="chatbot-messages" id="chatbot-messages">
-                    <div class="chatbot-message bot-message">
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content">
-                            <p>Hello! I'm your Cyber Ranger Assistant. I can help you with:</p>
-                            <ul>
-                                <li>Cybersecurity questions</li>
-                                <li>Password security tips</li>
-                                <li>Reporting cybercrimes</li>
-                                <li>Finding resources</li>
-                            </ul>
-                            <p>How can I assist you today?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chatbot-input-container">
-                    <div class="chatbot-quick-actions">
-                        <button class="quick-action-btn" data-message="How do I create a strong password?">Password Tips</button>
-                        <button class="quick-action-btn" data-message="How to report cybercrime?">Report Crime</button>
-                        <button class="quick-action-btn" data-message="What are common cyber threats?">Cyber Threats</button>
-                        <button class="quick-action-btn" data-message="Show me events">Events</button>
-                    </div>
-                    <div class="chatbot-input-wrapper">
-                        <input type="text" id="chatbot-input" placeholder="Ask me anything about cybersecurity..." maxlength="500">
-                        <button id="chatbot-send" class="chatbot-send-btn">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script type="module" src="../scripts/firebase-config.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/news.js"></script>
-    <script src="../scripts/chatbot.js"></script>
-</body>
+    </body>
 </html>

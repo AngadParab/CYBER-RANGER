@@ -5,7 +5,46 @@ import {
     query,
     orderBy
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+// scripts/events.js
 
+const DUMMY_EVENTS = [
+    {
+        id: "dummy-1",
+        title: "Goa Cyber Awareness Workshop",
+        posterUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+        type: "Workshop",
+        status: "upcoming",
+        date: "2026-03-10",
+        time: "10:00 AM",
+        location: "Panjim",
+        venue: "BITS Pilani, Goa Campus",
+        summary: "An intensive session on identifying phishing attempts and securing personal devices.",
+        details: ["Phishing Detection", "2FA Setup", "Secure Browsing"],
+        contact: {
+            organizer: "Cyber Ranger HQ",
+            phone: "0832 244 3201",
+            email: "picyber@goapolice.gov.in"
+        }
+    },
+    {
+        id: "dummy-2",
+        title: "Digital Hygiene Seminar",
+        posterUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
+        type: "Webinar",
+        status: "ongoing",
+        date: "2026-02-15",
+        time: "02:30 PM",
+        location: "Margao",
+        venue: "Ravindra Bhavan",
+        summary: "Learn the daily habits that keep your digital identity safe from common social engineering.",
+        details: ["Social Engineering", "Password Management", "Privacy Settings"],
+        contact: {
+            organizer: "Cyber Ranger Team",
+            phone: "0832 244 3201",
+            email: "picyber@goapolice.gov.in"
+        }
+    }
+];
 // Events Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     const eventsGrid = document.getElementById('eventsGrid');
@@ -147,29 +186,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Real-time Database Subscription
-    function subscribeToPublicEvents() {
-        const q = query(EVENTS_COLLECTION, orderBy("createdAt", "desc"));
-        onSnapshot(
-            q,
-            (snapshot) => {
-                publicEvents = snapshot.docs.map((doc) => ({ 
-                    id: doc.id, 
-                    ...doc.data() 
-                }));
-                renderEvents(publicEvents);
-            },
-            (error) => {
-                console.error("Failed to subscribe to public events", error);
-                if (eventsGrid) {
-                    eventsGrid.innerHTML = `
-                        <div style="text-align: center; padding: 2rem; color: #ff4444;">
-                            <p><i class="fas fa-exclamation-circle"></i> Unable to load events. Please refresh.</p>
-                        </div>
-                    `;
-                }
-            }
-        );
-    }
+
+
+function subscribeToPublicEvents() {
+    const q = query(EVENTS_COLLECTION, orderBy("createdAt", "desc"));
+    onSnapshot(
+        q,
+        (snapshot) => {
+            // Get real events from Firestore
+            const liveEvents = snapshot.docs.map((doc) => ({ 
+                id: doc.id, 
+                ...doc.data() 
+            }));
+            
+            // Combine dummy data with live data
+            publicEvents = [...DUMMY_EVENTS, ...liveEvents];
+            
+            renderEvents(publicEvents);
+        },
+        (error) => {
+            console.error("Failed to subscribe to public events", error);
+            // Fallback: Still show dummy data even if the database fails
+            renderEvents(DUMMY_EVENTS);
+        }
+    );
+}
 
     // Card animation observer
     function observeCards() {

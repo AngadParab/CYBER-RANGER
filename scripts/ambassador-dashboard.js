@@ -147,35 +147,55 @@ function wireEventsModal() {
 
 async function handleEventSubmit(e) {
     e.preventDefault();
-    // (Copy your existing Event Submit logic here if needed, or I can assume it's same)
-    // For brevity, I'll focus on the NEWS logic below, but ensure this exists!
     const form = elements.event.form;
     const btn = form.querySelector('button[type="submit"]');
-    btn.innerHTML = "Uploading..."; btn.disabled = true;
+    btn.innerHTML = "Uploading..."; 
+    btn.disabled = true;
 
     try {
         const formData = new FormData(form);
         let posterUrl = "";
         const file = document.getElementById('event-poster')?.files[0];
+        
         if(file) {
             const snap = await uploadBytes(ref(storage, `events/${Date.now()}_${file.name}`), file);
             posterUrl = await getDownloadURL(snap.ref);
         }
         
+        // Split details by new line to match the Array format expected by events.js
+        const detailsArray = formData.get("details") 
+            ? formData.get("details").split('\n').filter(line => line.trim() !== "")
+            : ["General Session"];
+
         await addDoc(EVENTS_COLLECTION, {
             title: formData.get("title"),
             date: formData.get("date"),
+            time: formData.get("time"),           // Added
             location: formData.get("location"),
+            venue: formData.get("venue"),         // Added
+            type: formData.get("type"),           // Added
             status: formData.get("status"),
+            summary: formData.get("summary"),     // Added
+            details: detailsArray,                // Added as Array
             posterUrl,
-            // ... other fields
+            contact: {                            // Added Contact Object
+                organizer: formData.get("organizer") || "Cyber Ranger Team",
+                phone: formData.get("phone") || "",
+                email: state.profile.email        // Use logged-in ambassador's email
+            },
             createdAt: new Date().toISOString()
         });
+
         form.reset();
         elements.event.modal.classList.remove("is-open");
-        alert("Event Added!");
-    } catch(err) { alert(err.message); }
-    finally { btn.innerHTML = "Publish Event"; btn.disabled = false; }
+        alert("Event Added Successfully!");
+    } catch(err) { 
+        console.error("Event Submission Error:", err);
+        alert("Failed to add event: " + err.message); 
+    } finally { 
+        btn.innerHTML = "Publish Event"; 
+        btn.disabled = false; 
+    }
 }
 
 function subscribeToEvents() {

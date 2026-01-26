@@ -524,9 +524,18 @@ body {
 }
 /* styles/events.css */
 
+/* styles/events.css */
+
 .card-image {
-    margin: -24px -24px 20px -24px; /* Pull image to edges ignoring card padding */
-    height: 200px;
+    /* 1. Pull image to edges */
+    margin: -24px -24px 20px -24px;
+    
+    /* 2. Increased height for better visibility */
+    height: 280px; 
+    
+    /* 3. Dark background (looks better with 'contain' borders) */
+    background: #000; 
+    
     overflow: hidden;
     position: relative;
     border-bottom: 1px solid var(--border-glow);
@@ -535,10 +544,14 @@ body {
 .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    
+    /* 4. THE KEY FIX: 'contain' shows the full image */
+    object-fit: contain; 
+    
     transition: transform 0.5s ease;
 }
 
+/* Optional: Zoom slightly on hover */
 .card:hover .card-image img {
-    transform: scale(1.1); /* Zoom effect on hover */
+    transform: scale(1.05);
 }

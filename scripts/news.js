@@ -36,7 +36,83 @@ const DUMMY_NEWS = [
             "Check for official bank communication through verified apps only.",
             "Report any unauthorized transaction to your bank within 24 hours."
         ]
+    },
+    {
+        id: "news-7",
+        title: "WhatsApp 'Pink' Scam Alert in Goa Schools",
+        date: "2026-01-24",
+        region: "Goa",
+        type: "impersonation",
+        summary: "The Cyber Cell has issued an advisory against a malicious 'WhatsApp Pink' link circulating in school parent groups. The link promises a new interface but installs spyware that steals contact lists and banking credentials.",
+        reference: "https://cybercrime.gov.in",
+        image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7",
+        tips: [
+            "Never click on links promising to change the color or theme of your apps.",
+            "Only update WhatsApp through the official Google Play Store or Apple App Store.",
+            "If installed, immediately backup data and factory reset your device."
+        ]
+    },
+    {
+        id: "news-8",
+        title: "Electricity Bill Fraud Targets Panjim Residents",
+        date: "2026-01-20",
+        region: "Goa",
+        type: "financial-fraud",
+        summary: "Multiple residents in Panjim reported receiving SMS alerts claiming their electricity will be disconnected tonight due to a 'previous month unpaid bill.' Victims were asked to call a fake helpline number to update their KYC.",
+        reference: "https://www.goapolice.gov.in",
+        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3",
+        tips: [
+            "The Electricity Department never threatens disconnection via personal mobile numbers.",
+            "Verify bill status only through the official Goa Government 'Department of Electricity' portal.",
+            "Do not download screen-sharing apps like AnyDesk or TeamViewer on a caller's request."
+        ]
+    },
+    {
+        id: "news-9",
+        title: "AI Voice Cloning Scam Reported in South Goa",
+        date: "2026-01-15",
+        region: "Goa",
+        type: "ai-phishing",
+        summary: "A Margao resident was nearly defrauded of ₹2 Lakhs after receiving a call that sounded exactly like his grandson in distress. Scammers used AI voice cloning to mimic the relative's voice asking for urgent bail money.",
+        reference: "https://sancharsaathi.gov.in",
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+        tips: [
+            "If a relative calls asking for money, hang up and call them back on their known number.",
+            "Set up a 'Family Code Word' to verify identities in emergency situations.",
+            "Report AI-generated voice scams to the 'Chakshu' portal immediately."
+        ]
+    },
+    {
+        id: "news-10",
+        title: "Fake 'Home-Stay' Bookings Scam Goa Tourists",
+        date: "2026-01-10",
+        region: "Goa",
+        type: "website-defacement",
+        summary: "Cyber-criminals have created high-quality fake websites for non-existent villas in North Goa. Tourists are losing significant deposits by booking through these fraudulent platforms advertised on social media.",
+        reference: "https://www.visitgoa.org",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+        tips: [
+            "Always verify property listings on established platforms like Airbnb, Booking.com, or Agoda.",
+            "Check for the physical address on Google Maps and read reviews from multiple sources.",
+            "Avoid paying via direct bank transfer; use credit cards for better fraud protection."
+        ]
+    },
+    {
+        id: "news-11",
+        title: "SIM Swap Fraud: ₹5 Lakhs Debited from Vasco Businessman",
+        date: "2026-01-05",
+        region: "Goa",
+        type: "sim-swap",
+        summary: "A businessman from Vasco lost access to his mobile network for 4 hours, during which scammers used a cloned SIM to bypass bank OTPs and siphon funds from his savings account.",
+        reference: "https://pib.gov.in",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        tips: [
+            "If your mobile signal disappears suddenly, contact your service provider immediately.",
+            "Link your bank accounts to an email address in addition to your phone number.",
+            "Use authenticator apps (like Google Authenticator) instead of SMS OTPs where possible."
+        ]
     }
+    
 ];
 
 document.addEventListener('DOMContentLoaded', function() {

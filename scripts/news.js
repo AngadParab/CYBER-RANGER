@@ -5,6 +5,53 @@ import {
     query, 
     orderBy 
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+const DUMMY_NEWS = [
+    {
+        id: "news-4",
+        title: "Goa Police Blocks 507 Fraudulent Websites in 2025",
+        date: "2025-11-30",
+        region: "Goa",
+        type: "website-defacement",
+        summary: "In a continuous effort to secure the digital landscape, the Goa Police Cyber Cell has successfully blocked 507 fraudulent websites and over 767 scam mobile numbers used to target residents this year. The action targeted platforms used for phishing and impersonation scams.",
+        reference: "https://www.prudentmedia.in/crime/goa-police-blocks-507-fraudulent-websites-767-scam-mobile-numbers-in-2025/35062.html",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51",
+        tips: [
+            "Use the 'Chakshu' portal on Sanchar Saathi to report suspicious messages.",
+            "Verify unknown numbers at cybercrime.gov.in before responding.",
+            "Avoid clicking links in SMS alerts regarding bank account 'KYC updates'."
+        ]
+    },
+    {
+        id: "news-5",
+        title: "RBI Panaji Conducts Cyber Fraud Awareness Programs",
+        date: "2025-12-24",
+        region: "Goa",
+        type: "financial-fraud",
+        summary: "The Reserve Bank of India (RBI) in Panaji has organized a series of financial literacy and cyber fraud awareness programs for students and citizens across Goa. The sessions focus on safe digital banking practices and identifying evolving online threats.",
+        reference: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2208182",
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3",
+        tips: [
+            "Never share your OTP or banking PIN with anyone claiming to be a bank official.",
+            "Check for official bank communication through verified apps only.",
+            "Report any unauthorized transaction to your bank within 24 hours."
+        ]
+    },
+    {
+        id: "news-6",
+        title: "UP Native Arrested for Child Safety Violations in Goa",
+        date: "2026-01-17",
+        region: "Goa",
+        type: "impersonation",
+        summary: "The Goa Cyber Crime Police arrested a 28-year-old native of Uttar Pradesh for illegal digital activities involving restricted content. This arrest highlights the state's increased surveillance and strict enforcement of the IT Act regarding digital safety.",
+        reference: "https://digitalgoa.com/goa-police-cyber-cell-blocks-672-online-platforms-linked-to-fraud-vice-activities-in-last-9-months/",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+        tips: [
+            "Be cautious about the content you download or share online.",
+            "Install parental control software on devices used by minors.",
+            "Report illegal or harmful digital content to the Cyber Crime Police Station at Ribandar."
+        ]
+    }
+];
 
 document.addEventListener('DOMContentLoaded', function() {
     const grid = document.getElementById('newsGrid');
@@ -142,5 +189,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize
-    subscribeToNews();
+// scripts/news.js
+
+function subscribeToNews() {
+    const q = query(NEWS_COLLECTION, orderBy("createdAt", "desc"));
+    onSnapshot(q, (snapshot) => {
+        // Get real news from Firestore
+        const liveNews = snapshot.docs.map((doc) => ({ 
+            id: doc.id, 
+            ...doc.data() 
+        }));
+        
+        // Combine with dummy data
+        const allNews = [...DUMMY_NEWS, ...liveNews];
+        
+        // Pass to your rendering function
+        renderNews(allNews); 
+    });
+}
 });

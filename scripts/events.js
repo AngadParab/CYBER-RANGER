@@ -43,6 +43,60 @@ const DUMMY_EVENTS = [
             phone: "0832 244 3201",
             email: "picyber@goapolice.gov.in"
         }
+    },
+    {
+        id: "dummy-3",
+        title: "Vasco Cyber-Safety Drive",
+        posterUrl: "https://images.unsplash.com/photo-1510511459019-5dee667ff30b",
+        type: "Workshop",
+        status: "upcoming",
+        date: "2026-04-05",
+        time: "11:00 AM",
+        location: "Vasco",
+        venue: "Mormugao Municipal Council Hall",
+        summary: "Community awareness program focusing on safe banking practices and protecting senior citizens from scams.",
+        details: ["UPI Safety", "Banking Fraud Prevention", "Safe App Usage"],
+        contact: {
+            organizer: "Vasco Cyber Cell",
+            phone: "0832 251 2345",
+            email: "vasco.cyber@goapolice.gov.in"
+        }
+    },
+    {
+        id: "dummy-4",
+        title: "Mapusa Tech-Security Summit",
+        posterUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51",
+        type: "Seminar",
+        status: "upcoming",
+        date: "2026-05-12",
+        time: "09:00 AM",
+        location: "Mapusa",
+        venue: "Mapusa Residency",
+        summary: "A deep dive into emerging threats like AI-generated deepfakes and advanced phishing techniques.",
+        details: ["AI & Cyber Crime", "Deepfake Recognition", "Network Security"],
+        contact: {
+            organizer: "Cyber Ranger HQ",
+            phone: "0832 244 3201",
+            email: "picyber@goapolice.gov.in"
+        }
+    },
+    {
+        id: "dummy-5",
+        title: "Student Cyber-Defense Bootcamp",
+        posterUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+        type: "Webinar",
+        status: "completed",
+        date: "2026-01-20",
+        time: "03:00 PM",
+        location: "Panjim",
+        venue: "Online via Google Meet",
+        summary: "An educational session for college students to build a career in cybersecurity and practice ethical hacking basics.",
+        details: ["Ethical Hacking Intro", "Cyber Law in India", "Career Guidance"],
+        contact: {
+            organizer: "Goa University Tech Hub",
+            phone: "0832 651 9000",
+            email: "techhub@unigoa.ac.in"
+        }
     }
 ];
 // Events Page JavaScript

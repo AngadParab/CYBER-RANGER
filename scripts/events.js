@@ -6,7 +6,26 @@ import {
     orderBy
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-
+const DUMMY_EVENTS = [
+    {
+        id: "dummy-1",
+        title: "Goa Cyber Awareness Workshop",
+        posterUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+        type: "Workshop",
+        status: "upcoming",
+        date: "2026-03-10",
+        time: "10:00 AM",
+        location: "Panjim",
+        venue: "BITS Pilani, Goa Campus",
+        summary: "An intensive session on identifying phishing attempts and securing personal devices.",
+        details: ["Phishing Detection", "2FA Setup", "Secure Browsing"],
+        contact: {
+            organizer: "Cyber Ranger HQ",
+            phone: "0832 244 3201",
+            email: "picyber@goapolice.gov.in"
+        }
+    }
+];
 
 document.addEventListener('DOMContentLoaded', function() {
     const eventsGrid = document.getElementById('eventsGrid');
@@ -14,13 +33,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const EVENTS_COLLECTION = collection(db, "public_events");
     let publicEvents = [];
 
+    // Helper to escape HTML (Prevents XSS)
+    function escapeHtml(text) {
+        if (!text) return "";
+        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // Helper to format dates
+    function formatDate(dateString) {
+        if (!dateString) return "TBD";
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return dateString; 
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
     function renderEvents(eventList = publicEvents) {
         if (!eventsGrid) return;
         
         if (!eventList || eventList.length === 0) {
             eventsGrid.innerHTML = `
                 <div style="text-align: center; padding: 2rem; color: #95a5a6;">
-                    <p>No events available at this time. Check back soon!</p>
+                    <p>No events available for this selection.</p>
                 </div>`;
             return;
         }
@@ -33,9 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 status: (event.status || "upcoming").toLowerCase(),
                 date: event.date || "",
                 time: event.time || "",
-                location: event.location || "—",
-                venue: event.venue || "—",
-                summary: event.summary || "",
+                location: event.location || "Goa",
+                venue: event.venue || "TBD",
+                summary: event.summary || "No summary available.",
                 details: Array.isArray(event.details) ? event.details : ["General Session"],
                 contact: {
                     organizer: event.contact?.organizer || "Cyber Ranger Team",
@@ -86,8 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const filterContainer = document.getElementById('dynamicFilters');
         if (!filterContainer) return;
 
+        // Extract unique locations, trim spaces, and ensure proper casing
         const locations = [...new Set(publicEvents.map(event => {
-            const loc = event.location.trim();
+            const loc = (event.location || "Goa").trim();
             return loc.charAt(0).toUpperCase() + loc.slice(1).toLowerCase();
         }))].sort();
 
@@ -102,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         filterContainer.innerHTML = filterHtml;
 
+        // Re-attach listeners to the new buttons
         filterContainer.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 filterContainer.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
@@ -109,18 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 filterEvents(btn.dataset.filter);
             });
         });
-    }
-
-    function formatDate(dateString) {
-        if (!dateString) return "TBD";
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) return dateString; 
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-
-    function escapeHtml(text) {
-        if (!text) return "";
-        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     function filterEvents(filter) {
@@ -135,16 +158,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function searchEvents(searchTerm) {
-        if (!searchTerm.trim()) {
-            renderEvents(publicEvents);
-            return;
-        }
         const term = searchTerm.toLowerCase();
         const filteredEvents = publicEvents.filter(event => 
             (event.title || "").toLowerCase().includes(term) ||
-            (event.summary || "").toLowerCase().includes(term) ||
-            (event.location || "").toLowerCase().includes(term) ||
-            (event.type || "").toLowerCase().includes(term)
+            (event.location || "").toLowerCase().includes(term)
         );
         renderEvents(filteredEvents);
     }
@@ -155,17 +172,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const liveEvents = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
             publicEvents = [...DUMMY_EVENTS, ...liveEvents];
             renderEvents(publicEvents);
-            renderFilters();
+            renderFilters(); // This rebuilds the filter buttons when new data arrives
         }, (error) => {
-            console.error("Subscription error:", error);
-            renderEvents(DUMMY_EVENTS);
+            console.error("Firestore Error:", error);
+            publicEvents = [...DUMMY_EVENTS];
+            renderEvents(publicEvents);
             renderFilters();
         });
     }
 
-   
     function observeCards() {
-   
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -173,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.card').forEach(card => {
             card.style.opacity = '0';
@@ -181,19 +197,17 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             cardObserver.observe(card);
         });
-   
     }
 
     if(searchInput) {
         searchInput.addEventListener('input', (e) => searchEvents(e.target.value));
     }
 
-  
     subscribeToPublicEvents();
     initializeMap();
 });
 
-
+// Map logic
 let map;
 let markers = [];
 
@@ -203,28 +217,21 @@ function initializeMap() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
     
     const eventLocations = [
-        { coords: [15.4909, 73.8278], title: 'Panjim Events', popup: '<b>Panjim</b>', filter: 'panjim' },
-        { coords: [15.2736, 73.9589], title: 'Margao Events', popup: '<b>Margao</b>', filter: 'margao' },
-        { coords: [15.3866, 73.8154], title: 'Vasco Events', popup: '<b>Vasco</b>', filter: 'vasco' },
-        { coords: [15.6029, 73.8114], title: 'Mapusa Events', popup: '<b>Mapusa</b>', filter: 'mapusa' }
+        { coords: [15.4909, 73.8278], title: 'Panjim', filter: 'panjim' },
+        { coords: [15.2736, 73.9589], title: 'Margao', filter: 'margao' },
+        { coords: [15.3866, 73.8154], title: 'Vasco', filter: 'vasco' },
+        { coords: [15.6029, 73.8114], title: 'Mapusa', filter: 'mapusa' }
     ];
     
-
-    const cyberIcon = L.divIcon({
-        className: 'cyber-marker',
-        html: '<div style="background: linear-gradient(135deg, #00ff88, #00ccff); width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff;"></div>',
-        iconSize: [20, 20]
-    });
-    
     eventLocations.forEach(location => {
-        const marker = L.marker(location.coords, { icon: cyberIcon }).addTo(map).bindPopup(location.popup);
+        const marker = L.marker(location.coords).addTo(map).bindPopup(`<b>${location.title}</b>`);
         marker.filter = location.filter;
         markers.push(marker);
     });
 }
 
 function centerMapOnLocation(filter) {
-if (!map) return;
+    if (!map) return;
     const locations = {
         'panjim': [15.4909, 73.8278],
         'margao': [15.2736, 73.9589],
@@ -232,7 +239,6 @@ if (!map) return;
         'mapusa': [15.6029, 73.8114],
         'all': [15.4909, 73.8278]
     };
-
     const coords = locations[filter] || locations['all'];
     map.setView(coords, filter === 'all' ? 11 : 13);
 }
